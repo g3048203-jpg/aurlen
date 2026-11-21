@@ -3,1292 +3,650 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#080B09" />
-  <title>AURLEN COMMUNITY — Сайты, Telegram-боты и визуальная упаковка</title>
-  <meta name="description" content="Цельная цифровая упаковка под ключ: разработка современных сайтов, функциональных Telegram-ботов и визуального оформления каналов." />
+  <meta name="theme-color" content="#050706" />
+  <title>AURLEN — Сайты, Telegram-боты и визуальная упаковка</title>
+  <meta name="description" content="Цельная цифровая упаковка под ключ: разработка современных сайтов, функциональных Telegram-ботов и визуального оформления." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg-base: #080B09;
-      --bg-elevated: #0D120F;
-      --bg-card: rgba(15, 21, 18, 0.64);
-      --bg-card-solid: #0F1512;
-      --border-subtle: rgba(163, 188, 169, 0.11);
-      --border-hover: rgba(163, 188, 169, 0.34);
-
-      --sage-primary: #93AC99;
-      --sage-bright: #BDD1C1;
-      --sage-dim: #5A6E5F;
-      --sage-glow: rgba(147, 172, 153, 0.15);
-
-      --text-main: #EFF3F0;
-      --text-secondary: #98A39B;
-      --text-muted: #5F6B63;
-
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --container: 1200px;
+      --bg: #050706;
+      --card: rgba(11, 16, 13, 0.82);
+      --border: rgba(168, 198, 175, 0.14);
+      --border-hi: rgba(198, 222, 201, 0.42);
+      --sage: #94B39B;
+      --sage-hi: #CBE2CE;
+      --text: #F4F7F5;
+      --muted: #98A69C;
+      --dim: #5D6B61;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
-      background-color: var(--bg-base);
-      color: var(--text-main);
-      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
     }
 
     body {
       min-height: 100vh;
       overflow-x: hidden;
       background:
-        radial-gradient(circle at 14% 6%, rgba(147, 172, 153, 0.085) 0%, transparent 42%),
-        radial-gradient(circle at 86% 35%, rgba(90, 110, 95, 0.075) 0%, transparent 46%),
-        var(--bg-base);
+        radial-gradient(ellipse 75% 42% at 15% 0%, rgba(110, 145, 118, 0.11), transparent 60%),
+        radial-gradient(ellipse 60% 42% at 88% 32%, rgba(70, 95, 76, 0.08), transparent 58%),
+        var(--bg);
       line-height: 1.6;
-      position: relative;
     }
 
-    ::selection {
-      background: var(--sage-primary);
-      color: #080B09;
+    ::selection { background: var(--sage-hi); color: var(--bg); }
+
+    .scroll-bar {
+      position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--sage), var(--sage-hi));
+      transform-origin: 0 50%; transform: scaleX(0); z-index: 900;
     }
 
-    /* Полоса прогресса скролла */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--sage-dim), var(--sage-bright));
-      transform-origin: 0 50%;
-      transform: scaleX(0);
-      z-index: 1000;
-      will-change: transform;
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 890;
+      opacity: 0.014; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Фиксированный слой пленочного зерна */
-    .film-grain {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.036;
-      transform: translateZ(0);
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+
+    /* ШАПКА */
+    header {
+      position: sticky; top: 0; z-index: 60;
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      background: rgba(5, 7, 6, 0.82);
+      border-bottom: 1px solid rgba(168, 198, 175, 0.08);
     }
 
-    .ambient-orb {
-      position: fixed;
-      width: 560px;
-      height: 560px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(147, 172, 153, 0.085) 0%, transparent 68%);
-      filter: blur(65px);
-      pointer-events: none;
-      z-index: 0;
-      top: -160px;
-      right: -120px;
-      animation: floatOrb 18s ease-in-out infinite alternate;
-      will-change: transform;
-    }
+    .nav-wrap { height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 
-    @keyframes floatOrb {
-      0% { transform: translate3d(0, 0, 0) scale(1); }
-      100% { transform: translate3d(-75px, 95px, 0) scale(1.07); }
-    }
+    .brand { display: inline-flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--text); }
+    .brand b { font-family: var(--serif); font-size: 27px; font-weight: 600; letter-spacing: 0.06em; }
+    .brand span { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); }
 
-    .container {
-      width: 100%;
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 2;
-    }
+    nav { display: flex; gap: 28px; }
+    nav a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .25s; }
+    nav a:hover { color: var(--sage-hi); }
 
-    /* HEADER */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      background: rgba(8, 11, 9, 0.76);
-      border-bottom: 1px solid rgba(163, 188, 169, 0.07);
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .sla { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+    .dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--sage-hi);
+      box-shadow: 0 0 10px var(--sage-hi); animation: pulse 2.6s ease-in-out infinite; flex-shrink: 0;
     }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.85); } }
 
-    .header-inner {
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    .btn-sm {
+      display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; border-radius: 11px;
+      background: rgba(148, 179, 155, 0.12); border: 1px solid rgba(168, 198, 175, 0.24);
+      color: var(--sage-hi); font-size: 13px; font-weight: 500; text-decoration: none;
+      transition: background .3s var(--ease), color .3s var(--ease);
     }
+    .btn-sm:hover { background: var(--sage-hi); color: var(--bg); }
 
-    .brand {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text-main);
-    }
-
-    .brand-main {
-      font-family: var(--font-display);
-      font-size: 26px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      line-height: 1;
-    }
-
-    .brand-sub {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--sage-primary);
-    }
-
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .header-nav a {
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.25s ease;
-    }
-
-    .header-nav a:hover {
-      color: var(--sage-bright);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .sla-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--sage-bright);
-      box-shadow: 0 0 12px var(--sage-bright);
-      animation: pulseSage 2.6s ease-in-out infinite;
-    }
-
-    @keyframes pulseSage {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.85); }
-    }
-
-    .btn-header {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 16px;
-      border-radius: 11px;
-      background: rgba(147, 172, 153, 0.11);
-      border: 1px solid rgba(163, 188, 169, 0.22);
-      color: var(--sage-bright);
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.3s var(--ease-out-expo);
-    }
-
-    .btn-header:hover {
-      background: var(--sage-primary);
-      color: #080B09;
-      border-color: var(--sage-primary);
-    }
-
-    /* HERO */
-    .hero {
-      padding: 88px 0 112px;
-    }
-
-    .hero-split {
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 48px;
-      align-items: center;
-      margin-bottom: 64px;
-    }
+    /* ПЕРВЫЙ ЭКРАН */
+    .hero { padding: 80px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 48px; align-items: center; }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--sage-primary);
-      margin-bottom: 22px;
+      display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 18px;
     }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--sage); opacity: .7; }
 
-    .eyebrow::before {
-      content: "";
-      width: 26px;
-      height: 1px;
-      background: var(--sage-primary);
-      opacity: 0.65;
+    h1 {
+      font-family: var(--serif); font-size: clamp(46px, 6.2vw, 82px); font-weight: 500;
+      line-height: 0.96; letter-spacing: -0.02em; margin-bottom: 22px;
     }
+    h1 span { display: block; font-style: italic; color: var(--sage-hi); }
 
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(46px, 6.2vw, 82px);
-      font-weight: 500;
-      line-height: 0.98;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-      margin-bottom: 24px;
-    }
+    .lead { max-width: 550px; font-size: 16.5px; font-weight: 300; line-height: 1.7; color: var(--muted); margin-bottom: 32px; }
 
-    .hero-title span {
-      display: block;
-      font-style: italic;
-      font-weight: 500;
-      color: var(--sage-bright);
-    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
 
-    .hero-lead {
-      max-width: 560px;
-      font-size: 16.5px;
-      font-weight: 300;
-      line-height: 1.72;
-      color: var(--text-secondary);
-      margin-bottom: 34px;
+    .btn-main {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 28px; border-radius: 14px; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #D5E7D8 0%, #94B39B 100%);
+      color: var(--bg); font-family: var(--sans); font-size: 14px; font-weight: 600;
+      text-decoration: none; box-shadow: 0 14px 34px -8px rgba(148, 179, 155, 0.36);
+      transition: transform .35s var(--ease), box-shadow .35s ease;
     }
-
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .btn-sage {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 16px 28px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--sage-bright) 0%, var(--sage-primary) 100%);
-      color: #080B09;
-      font-family: var(--font-sans);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      text-decoration: none;
-      box-shadow: 0 12px 34px -8px rgba(147, 172, 153, 0.35);
-      transition: transform 0.35s var(--ease-out-expo), box-shadow 0.35s ease, filter 0.3s ease;
-      will-change: transform;
-    }
-
-    .btn-sage:hover {
-      box-shadow: 0 18px 42px -6px rgba(189, 209, 193, 0.48);
-      filter: brightness(1.04);
-    }
+    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 20px 42px -6px rgba(198, 222, 201, 0.5); }
 
     .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 24px;
-      border-radius: 14px;
-      background: rgba(15, 21, 18, 0.6);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      font-size: 14px;
-      font-weight: 400;
-      text-decoration: none;
-      transition: border-color 0.3s ease, background 0.3s ease;
+      display: inline-flex; align-items: center; gap: 10px; padding: 16px 24px; border-radius: 14px;
+      background: rgba(11, 16, 13, 0.72); border: 1px solid var(--border);
+      color: var(--text); font-family: var(--sans); font-size: 14px; text-decoration: none; cursor: pointer;
+      transition: border-color .3s, background .3s;
+    }
+    .btn-ghost:hover { border-color: var(--border-hi); background: rgba(148, 179, 155, 0.1); }
+
+    .note { margin-top: 14px; font-size: 12.5px; color: var(--dim); }
+    .note strong { color: var(--sage-hi); font-weight: 500; }
+
+    /* ОКНО ПОМОЩНИКА */
+    .assistant-box {
+      background: linear-gradient(165deg, rgba(14, 20, 16, 0.94), rgba(8, 11, 9, 0.98));
+      border: 1px solid rgba(168, 198, 175, 0.18); border-radius: 24px; padding: 22px;
+      box-shadow: 0 30px 65px -20px rgba(0, 0, 0, 0.85);
+    }
+    .assistant-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid rgba(168, 198, 175, 0.09);
+    }
+    .assistant-id { display: flex; align-items: center; gap: 11px; }
+    .avatar-badge {
+      width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center;
+      background: rgba(198, 222, 201, 0.16); border: 1px solid rgba(198, 222, 201, 0.3);
+      font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--sage-hi);
+    }
+    .assistant-id b { display: block; font-size: 13.5px; font-weight: 500; }
+    .assistant-id span { font-size: 11.5px; color: var(--sage); }
+
+    .tag-pill {
+      font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-hi);
+      padding: 4px 9px; border-radius: 7px; background: rgba(148, 179, 155, 0.08);
+      border: 1px solid rgba(168, 198, 175, 0.16);
     }
 
-    .btn-ghost:hover {
-      border-color: var(--border-hover);
-      background: rgba(147, 172, 153, 0.08);
+    .chat-log { display: flex; flex-direction: column; gap: 11px; min-height: 152px; margin-bottom: 14px; }
+    .msg {
+      padding: 12px 15px; border-radius: 14px; font-size: 13.5px; line-height: 1.55;
+      animation: pop .38s var(--ease);
     }
+    @keyframes pop { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+    .msg.bot { background: rgba(148, 179, 155, 0.09); border: 1px solid rgba(148, 179, 155, 0.16); border-bottom-left-radius: 4px; }
+    .msg.user { align-self: flex-end; background: rgba(198, 222, 201, 0.18); border: 1px solid rgba(198, 222, 201, 0.28); color: var(--sage-hi); border-bottom-right-radius: 4px; }
+    .msg strong { color: var(--sage-hi); font-weight: 500; }
 
-    .hero-note {
-      margin-top: 14px;
-      font-size: 12.5px;
-      color: var(--text-muted);
-    }
-
-    .hero-note strong {
-      color: var(--sage-primary);
-      font-weight: 500;
-    }
-
-    /* LIVE UI СИМУЛЯТОР В HERO (В стиле axiom-prod, в шалфее) */
-    .live-widget {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 24px;
-      padding: 22px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 28px 60px -20px rgba(0, 0, 0, 0.65);
-    }
-
-    .widget-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 16px;
-      margin-bottom: 18px;
-      border-bottom: 1px solid rgba(163, 188, 169, 0.09);
-    }
-
-    .widget-bot-info {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-    }
-
-    .widget-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
-      background: linear-gradient(135deg, rgba(189, 209, 193, 0.22), rgba(90, 110, 95, 0.18));
-      border: 1px solid rgba(189, 209, 193, 0.28);
-      display: grid;
-      place-items: center;
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--sage-bright);
-    }
-
-    .widget-bot-name {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--text-main);
-      line-height: 1.2;
-    }
-
-    .widget-bot-status {
-      font-size: 11.5px;
-      color: var(--sage-primary);
-    }
-
-    .widget-tag {
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 4px 9px;
-      border-radius: 7px;
-      border: 1px solid rgba(163, 188, 169, 0.1);
-    }
-
-    .chat-stream {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      min-height: 158px;
-      margin-bottom: 16px;
-    }
-
-    .chat-msg {
-      padding: 13px 15px;
-      border-radius: 15px;
-      font-size: 13.5px;
-      line-height: 1.55;
-      animation: msgPop 0.4s var(--ease-out-expo);
-    }
-
-    @keyframes msgPop {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .chat-msg.bot {
-      background: rgba(147, 172, 153, 0.08);
-      border: 1px solid rgba(147, 172, 153, 0.14);
-      color: var(--text-main);
-      border-bottom-left-radius: 4px;
-    }
-
-    .chat-msg.user {
-      align-self: flex-end;
-      background: rgba(189, 209, 193, 0.16);
-      border: 1px solid rgba(189, 209, 193, 0.25);
-      color: var(--sage-bright);
-      border-bottom-right-radius: 4px;
-    }
-
-    .chat-msg strong {
-      color: var(--sage-bright);
-      font-weight: 500;
-    }
-
-    .inline-kb {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
+    .kb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
     .kb-btn {
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: rgba(8, 11, 9, 0.65);
-      border: 1px solid rgba(163, 188, 169, 0.15);
-      color: var(--text-secondary);
-      font-family: var(--font-sans);
-      font-size: 12px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.25s ease;
-    }
-
-    .kb-btn:hover, .kb-btn.active {
-      border-color: var(--sage-primary);
-      background: rgba(147, 172, 153, 0.14);
-      color: var(--sage-bright);
-    }
-
-    .live-toast-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 11px 14px;
-      border-radius: 12px;
-      background: rgba(8, 11, 9, 0.72);
-      border: 1px solid rgba(163, 188, 169, 0.1);
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-
-    .live-toast-bar span:first-child {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* SPOTLIGHT КАРТОЧКИ */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .spotlight-card {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 30px 26px;
-      overflow: hidden;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      transition: transform 0.5s var(--ease-out-expo), border-color 0.4s ease;
-    }
-
-    .spotlight-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(147, 172, 153, 0.13),
-        transparent 60%
-      );
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
-    .spotlight-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--border-hover);
-    }
-
-    .spotlight-card:hover::before {
-      opacity: 1;
-    }
-
-    .pillar-num {
-      font-family: var(--font-display);
-      font-size: 15px;
-      font-style: italic;
-      color: var(--sage-primary);
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .pillar-title {
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--text-main);
-      margin-bottom: 8px;
-    }
-
-    .pillar-desc {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* ОБЩИЕ СЕКЦИИ */
-    .section {
-      padding: 108px 0;
-      border-top: 1px solid rgba(163, 188, 169, 0.07);
-    }
-
-    .section-head {
-      margin-bottom: 48px;
-      max-width: 680px;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 4.8vw, 58px);
-      font-weight: 500;
-      line-height: 1.06;
-      letter-spacing: -0.015em;
-      color: var(--text-main);
-      margin-bottom: 14px;
-    }
-
-    .section-subtitle {
-      font-size: 15.5px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* ПОШАГОВЫЙ КВИЗ-КОНФИГУРАТОР (Без цен, с расчётом выгоды и отправкой @wackzzy) */
-    .quiz-shell {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 26px;
-      padding: 40px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .quiz-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-bottom: 24px;
-      margin-bottom: 32px;
-      border-bottom: 1px solid rgba(163, 188, 169, 0.09);
-    }
-
-    .quiz-step-label {
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--sage-primary);
-      font-weight: 500;
-    }
-
-    .synergy-meter {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: rgba(147, 172, 153, 0.09);
-      border: 1px solid rgba(147, 172, 153, 0.22);
-      font-size: 12.5px;
-      color: var(--sage-bright);
-      transition: all 0.35s ease;
-    }
-
-    .quiz-progress-track {
-      width: 100%;
-      height: 3px;
-      background: rgba(163, 188, 169, 0.09);
-      border-radius: 99px;
-      overflow: hidden;
-      margin-bottom: 32px;
-    }
-
-    .quiz-progress-fill {
-      height: 100%;
-      width: 33.33%;
-      background: linear-gradient(90deg, var(--sage-dim), var(--sage-bright));
-      transition: width 0.5s var(--ease-out-expo);
-    }
-
-    .quiz-question {
-      font-family: var(--font-display);
-      font-size: clamp(28px, 3.4vw, 38px);
-      font-weight: 500;
-      color: var(--text-main);
-      margin-bottom: 8px;
-    }
-
-    .quiz-hint {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      margin-bottom: 26px;
-    }
-
-    .quiz-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
-    .quiz-opt {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 20px 22px;
-      border-radius: 16px;
-      background: rgba(8, 11, 9, 0.55);
-      border: 1px solid rgba(163, 188, 169, 0.12);
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.3s var(--ease-out-expo);
-    }
-
-    .quiz-opt:hover {
-      border-color: rgba(163, 188, 169, 0.32);
-      background: rgba(147, 172, 153, 0.05);
-    }
-
-    .quiz-opt.selected {
-      border-color: var(--sage-bright);
-      background: rgba(147, 172, 153, 0.13);
-      box-shadow: 0 0 0 1px rgba(189, 209, 193, 0.25);
-    }
-
-    .quiz-opt-title {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .quiz-opt-sub {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--text-secondary);
-    }
-
-    .quiz-check {
-      width: 22px;
-      height: 22px;
-      border-radius: 7px;
-      border: 1px solid rgba(163, 188, 169, 0.3);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      color: transparent;
-      transition: all 0.25s ease;
-    }
-
-    .quiz-opt.selected .quiz-check {
-      background: var(--sage-bright);
-      border-color: var(--sage-bright);
-      color: #080B09;
-    }
-
-    .quiz-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .quiz-summary-box {
-      padding: 24px;
-      border-radius: 18px;
-      background: rgba(8, 11, 9, 0.65);
-      border: 1px solid rgba(163, 188, 169, 0.16);
-      margin-bottom: 24px;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(163, 188, 169, 0.07);
-      font-size: 14px;
-    }
-
-    .summary-row:last-child { border-bottom: none; }
-    .summary-row span:first-child { color: var(--text-muted); }
-    .summary-row span:last-child { color: var(--text-main); font-weight: 500; text-align: right; }
-
-    /* TIMELINE ЭТАПЫ РАБОТЫ */
-    .timeline-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .step-card {
-      padding: 28px 24px;
-    }
-
-    .step-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--sage-bright);
-      padding: 5px 10px;
-      border-radius: 8px;
-      background: rgba(147, 172, 153, 0.1);
-      border: 1px solid rgba(147, 172, 153, 0.18);
-      margin-bottom: 18px;
-    }
-
-    .step-title {
-      font-family: var(--font-display);
-      font-size: 25px;
-      font-weight: 500;
-      color: var(--text-main);
-      margin-bottom: 10px;
-      line-height: 1.15;
-    }
-
-    .step-desc {
-      font-size: 13.5px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.62;
-    }
-
-    /* PRODUCTS GRID */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-    }
-
-    .product-card {
-      padding: 34px 30px;
-    }
-
-    .product-top {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      padding-bottom: 18px;
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgba(163, 188, 169, 0.09);
-    }
-
-    .product-title {
-      font-family: var(--font-display);
-      font-size: 29px;
-      font-weight: 500;
-      color: var(--text-main);
-      line-height: 1.1;
-    }
-
-    .product-tag {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--sage-primary);
-      padding: 5px 10px;
-      border-radius: 8px;
-      background: rgba(147, 172, 153, 0.08);
-      border: 1px solid rgba(147, 172, 153, 0.16);
-      flex-shrink: 0;
-    }
-
-    .product-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .product-list li {
-      position: relative;
-      padding-left: 20px;
-      font-size: 14.5px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .product-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 6px;
-      height: 1px;
-      background: var(--sage-primary);
-    }
-
-    .product-list strong {
-      color: var(--sage-bright);
-      font-weight: 500;
-    }
-
-    /* PRIVATE COMMUNITY */
-    .private-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .private-text p {
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin-bottom: 20px;
-      max-width: 540px;
-    }
-
-    .private-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 32px;
-    }
-
-    .visual-frame {
-      position: relative;
-      border-radius: 24px;
-      padding: 10px;
-      background: linear-gradient(160deg, rgba(163, 188, 169, 0.18), rgba(163, 188, 169, 0.03));
-      border: 1px solid var(--border-subtle);
-      overflow: hidden;
-    }
-
-    .visual-frame img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 4 / 4.2;
-      object-fit: cover;
-      border-radius: 16px;
-      filter: contrast(1.04) saturate(0.92);
-      transition: transform 0.9s var(--ease-out-expo);
-    }
-
-    .visual-frame:hover img {
-      transform: scale(1.03);
-    }
-
-    /* FAQ АККОРДЕОН */
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 860px;
-    }
-
-    .faq-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: border-color 0.3s ease;
-    }
-
-    .faq-item.open {
-      border-color: var(--border-hover);
-    }
-
-    .faq-trigger {
-      width: 100%;
-      padding: 22px 26px;
-      background: none;
-      border: none;
-      color: var(--text-main);
-      font-family: var(--font-sans);
-      font-size: 15.5px;
-      font-weight: 500;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .faq-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 1px solid rgba(163, 188, 169, 0.2);
-      display: grid;
-      place-items: center;
-      color: var(--sage-bright);
-      flex-shrink: 0;
-      transition: transform 0.35s var(--ease-out-expo), background 0.3s ease;
-    }
-
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-      background: rgba(147, 172, 153, 0.15);
-    }
-
-    .faq-body {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.4s var(--ease-out-expo);
-    }
-
-    .faq-item.open .faq-body {
-      grid-template-rows: 1fr;
-    }
-
-    .faq-content {
-      overflow: hidden;
-    }
-
-    .faq-content p {
-      padding: 0 26px 22px;
-      font-size: 14.5px;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.68;
-    }
+      padding: 10px; border-radius: 10px; background: rgba(5, 7, 6, 0.8);
+      border: 1px solid rgba(168, 198, 175, 0.15); color: var(--muted);
+      font-family: var(--sans); font-size: 12px; cursor: pointer; transition: all .25s;
+    }
+    .kb-btn:hover, .kb-btn.active { border-color: var(--sage-hi); background: rgba(148, 179, 155, 0.16); color: var(--sage-hi); }
+
+    .assistant-foot {
+      display: flex; align-items: center; justify-content: space-between; padding: 10px 14px;
+      border-radius: 11px; background: rgba(5, 7, 6, 0.85); border: 1px solid rgba(168, 198, 175, 0.1);
+      font-size: 12px; color: var(--muted);
+    }
+    .assistant-foot span:first-child { display: inline-flex; align-items: center; gap: 8px; }
+
+    /* ВЕЕР КАРТОЧЕК (ПОЛНОСТЬЮ НА РУССКОМ) */
+    .showcase { padding: 20px 0 88px; overflow: hidden; }
+    .fan { display: flex; justify-content: center; padding: 24px 12px 44px; }
+
+    .fan-card {
+      position: relative; width: 252px; min-height: 348px; border-radius: 24px; padding: 24px 20px;
+      display: flex; flex-direction: column; justify-content: space-between; flex-shrink: 0; cursor: pointer;
+      transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .3s;
+      will-change: transform; box-shadow: 0 24px 55px -16px rgba(0, 0, 0, 0.88);
+    }
+    .fan-card:nth-child(1) { transform: translate(34px, 16px) rotate(-6deg); z-index: 1; }
+    .fan-card:nth-child(2) { transform: translate(17px, 5px) rotate(-3deg); z-index: 2; }
+    .fan-card:nth-child(3) { transform: translateY(-6px); z-index: 4; }
+    .fan-card:nth-child(4) { transform: translate(-17px, 5px) rotate(3deg); z-index: 2; }
+    .fan-card:nth-child(5) { transform: translate(-34px, 16px) rotate(6deg); z-index: 1; }
+
+    .fan-card:hover {
+      transform: translateY(-18px) scale(1.05) !important; z-index: 20 !important;
+      box-shadow: 0 36px 75px -12px rgba(0, 0, 0, 0.95), 0 0 0 1px var(--sage-hi);
+    }
+
+    .fan-card.dark {
+      background: linear-gradient(165deg, #101713 0%, #070A08 100%);
+      border: 1px solid rgba(168, 198, 175, 0.22);
+    }
+    .fan-card.sage {
+      background: linear-gradient(165deg, #19261E 0%, #0D1510 100%);
+      border: 1px solid rgba(198, 222, 201, 0.3);
+    }
+
+    .kicker { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; display: block; }
+    .fan-card h3 { font-family: var(--serif); font-size: 25px; font-weight: 500; line-height: 1.06; margin-bottom: 8px; }
+    .fan-card p { font-size: 12px; line-height: 1.48; color: var(--muted); margin-bottom: 16px; }
+
+    /* Мини-сцены внутри веера */
+    .ui-web {
+      background: #060807; border-radius: 15px; padding: 12px;
+      border: 1px solid rgba(198, 222, 201, 0.22);
+    }
+    .ui-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; padding-bottom: 6px; border-bottom: 1px solid rgba(168, 198, 175, 0.1); }
+    .ui-dots { display: flex; gap: 4px; }
+    .ui-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--sage-hi); opacity: .7; }
+    .ui-bar span { font-size: 9.5px; color: var(--sage); }
+
+    .ui-banner {
+      border-radius: 10px; padding: 10px;
+      background: linear-gradient(135deg, rgba(148, 179, 155, 0.22), rgba(18, 27, 21, 0.92));
+      border: 1px solid rgba(198, 222, 201, 0.24); margin-bottom: 8px;
+    }
+    .ui-banner b { display: block; font-family: var(--serif); font-size: 15px; line-height: 1.1; margin-bottom: 3px; }
+    .ui-banner span { font-size: 9.5px; color: var(--sage-hi); }
+
+    .ui-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .ui-pill {
+      padding: 6px 8px; border-radius: 8px; background: rgba(148, 179, 155, 0.08);
+      border: 1px solid rgba(168, 198, 175, 0.14); font-size: 9.5px; color: var(--muted);
+    }
+    .ui-pill strong { display: block; color: var(--sage-hi); font-size: 11px; }
+
+    .tg-stack { display: flex; flex-direction: column; gap: 8px; }
+    .tg-notif {
+      background: linear-gradient(145deg, rgba(148, 179, 155, 0.14), rgba(10, 15, 12, 0.92));
+      border: 1px solid rgba(198, 222, 201, 0.22); border-radius: 12px; padding: 10px 12px;
+      font-size: 11px; line-height: 1.4; animation: floatY 4s ease-in-out infinite alternate;
+    }
+    .tg-notif:nth-child(2) { animation-delay: 1.5s; }
+    @keyframes floatY { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
+    .tg-notif b { display: flex; justify-content: space-between; color: var(--sage-hi); font-weight: 500; margin-bottom: 2px; }
+
+    .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .b-tile {
+      height: 66px; border-radius: 12px; padding: 10px; display: flex; flex-direction: column;
+      justify-content: space-between; position: relative; overflow: hidden;
+      border: 1px solid rgba(198, 222, 201, 0.25);
+    }
+    .b-tile::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.14) 50%, transparent 70%);
+      transform: translateX(-100%); animation: sheen 5.5s ease-in-out infinite;
+    }
+    .b-tile:nth-child(2)::after { animation-delay: 1.3s; }
+    .b-tile:nth-child(3)::after { animation-delay: 2.6s; }
+    .b-tile:nth-child(4)::after { animation-delay: 3.9s; }
+    @keyframes sheen { 0%, 65% { transform: translateX(-100%); } 100% { transform: translateX(120%); } }
+
+    .b-tile.t1 { background: linear-gradient(135deg, #1D2E23, #0A100C); }
+    .b-tile.t2 { background: linear-gradient(135deg, #9EC0A5, #5F7E66); color: var(--bg); }
+    .b-tile.t3 { background: linear-gradient(135deg, #131B16, #070A08); }
+    .b-tile.t4 { background: linear-gradient(135deg, #CBE2CE, #85A68C); color: var(--bg); }
+    .b-tile span { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; opacity: .82; }
+    .b-tile b { font-family: var(--serif); font-size: 16px; font-weight: 600; line-height: 1; }
+
+    .road-list { display: flex; flex-direction: column; gap: 6px; }
+    .road-row {
+      display: flex; justify-content: space-between; padding: 7px 10px; border-radius: 10px;
+      background: rgba(5, 7, 6, 0.6); border: 1px solid rgba(168, 198, 175, 0.14);
+      font-size: 11px; color: var(--muted);
+    }
+    .road-row.hi { background: linear-gradient(135deg, #CBE2CE, #94B39B); color: var(--bg); font-weight: 600; border: none; }
+
+    .chat-mini { display: flex; flex-direction: column; gap: 8px; font-size: 11px; }
+    .b-in { background: rgba(148, 179, 155, 0.14); border: 1px solid rgba(168, 198, 175, 0.18); padding: 9px 11px; border-radius: 12px; border-bottom-left-radius: 3px; }
+    .b-out { align-self: flex-end; background: linear-gradient(135deg, #CBE2CE, #94B39B); color: var(--bg); font-weight: 600; padding: 8px 11px; border-radius: 12px; border-bottom-right-radius: 3px; }
+
+    .center-cta { text-align: center; margin-top: 6px; }
+
+    /* СЕКЦИИ И КАРТОЧКИ */
+    .section { padding: 98px 0; border-top: 1px solid rgba(168, 198, 175, 0.08); }
+    .sec-head { margin-bottom: 44px; max-width: 660px; }
+    h2 { font-family: var(--serif); font-size: clamp(36px, 4.6vw, 56px); font-weight: 500; line-height: 1.06; margin-bottom: 12px; }
+    .sec-sub { font-size: 15.5px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+    .card {
+      position: relative; background: var(--card); border: 1px solid var(--border);
+      border-radius: 22px; padding: 32px 28px; overflow: hidden;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      transition: transform .45s var(--ease), border-color .35s;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s;
+      background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(148, 179, 155, 0.14), transparent 60%);
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--border-hi); }
+    .card:hover::before { opacity: 1; }
+
+    /* КОНФИГУРАТОР */
+    .quiz-box {
+      background: linear-gradient(165deg, rgba(13, 19, 15, 0.9), rgba(7, 10, 8, 0.96));
+      border: 1px solid rgba(168, 198, 175, 0.16); border-radius: 26px; padding: 38px;
+    }
+    .quiz-top {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px;
+      padding-bottom: 22px; margin-bottom: 28px; border-bottom: 1px solid rgba(168, 198, 175, 0.09);
+    }
+    .step-lbl { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage); font-weight: 500; }
+    .meter {
+      display: inline-flex; align-items: center; gap: 9px; padding: 8px 15px; border-radius: 999px;
+      background: rgba(148, 179, 155, 0.1); border: 1px solid rgba(148, 179, 155, 0.24);
+      font-size: 12.5px; color: var(--sage-hi);
+    }
+    .prog-track { width: 100%; height: 3px; background: rgba(168, 198, 175, 0.09); border-radius: 99px; overflow: hidden; margin-bottom: 28px; }
+    .prog-fill { height: 100%; width: 33.3%; background: linear-gradient(90deg, var(--sage), var(--sage-hi)); transition: width .5s var(--ease); }
+
+    .q-title { font-family: var(--serif); font-size: clamp(28px, 3.4vw, 38px); font-weight: 500; margin-bottom: 6px; }
+    .q-hint { font-size: 13.5px; color: var(--dim); margin-bottom: 24px; }
+
+    .q-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+    .q-opt {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 14px;
+      padding: 20px 22px; border-radius: 16px; background: rgba(5, 7, 6, 0.74);
+      border: 1px solid rgba(168, 198, 175, 0.12); cursor: pointer; text-align: left;
+      transition: all .28s var(--ease);
+    }
+    .q-opt:hover { border-color: rgba(168, 198, 175, 0.34); background: rgba(148, 179, 155, 0.07); }
+    .q-opt.sel { border-color: var(--sage-hi); background: rgba(148, 179, 155, 0.15); }
+    .q-opt b { display: block; font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .q-opt span { font-size: 13px; font-weight: 300; color: var(--muted); }
+    .chk {
+      width: 22px; height: 22px; border-radius: 7px; border: 1px solid rgba(168, 198, 175, 0.3);
+      display: grid; place-items: center; flex-shrink: 0; color: transparent; transition: all .2s;
+    }
+    .q-opt.sel .chk { background: var(--sage-hi); border-color: var(--sage-hi); color: var(--bg); }
+
+    .q-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .sum-box { padding: 22px; border-radius: 18px; background: rgba(5, 7, 6, 0.82); border: 1px solid rgba(168, 198, 175, 0.18); margin-bottom: 22px; }
+    .sum-row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid rgba(168, 198, 175, 0.08); font-size: 14px; }
+    .sum-row:last-child { border-bottom: none; }
+    .sum-row span:first-child { color: var(--dim); }
+    .sum-row span:last-child { font-weight: 500; text-align: right; }
+
+    /* ПРОДУКТЫ И ЭТАПЫ */
+    .prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .prod-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid rgba(168, 198, 175, 0.09); }
+    .prod-head h3 { font-family: var(--serif); font-size: 28px; font-weight: 500; }
+    .prod-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .prod-list li { position: relative; padding-left: 18px; font-size: 14.5px; font-weight: 300; color: var(--muted); }
+    .prod-list li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 1px; background: var(--sage); }
+    .prod-list strong { color: var(--sage-hi); font-weight: 500; }
+
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .step-tag {
+      display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--sage-hi); padding: 5px 10px; border-radius: 8px;
+      background: rgba(148, 179, 155, 0.11); border: 1px solid rgba(148, 179, 155, 0.2); margin-bottom: 16px;
+    }
+    .steps-grid h3 { font-family: var(--serif); font-size: 24px; font-weight: 500; margin-bottom: 8px; line-height: 1.15; }
+    .steps-grid p { font-size: 13.5px; font-weight: 300; color: var(--muted); }
+
+    /* ЗАКРЫТОЕ СООБЩЕСТВО + ФОТО */
+    .priv-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 50px; align-items: center; }
+    .priv-grid p { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 18px; max-width: 530px; }
+
+    .photo-card {
+      border-radius: 26px; padding: 12px;
+      background: linear-gradient(155deg, rgba(198, 222, 201, 0.24), rgba(11, 16, 13, 0.94) 50%, rgba(148, 179, 155, 0.14));
+      border: 1px solid rgba(198, 222, 201, 0.26);
+      box-shadow: 0 32px 70px -18px rgba(0, 0, 0, 0.92);
+      transition: transform .55s var(--ease);
+    }
+    .photo-card:hover { transform: translateY(-6px); }
+    .photo-in { position: relative; border-radius: 18px; overflow: hidden; background: var(--bg); }
+    .photo-in img {
+      display: block; width: 100%; aspect-ratio: 4 / 4.2; object-fit: cover;
+      filter: contrast(1.12) saturate(1.06) brightness(0.96);
+      transition: transform .85s var(--ease);
+    }
+    .photo-card:hover img { transform: scale(1.04); }
+    .photo-in::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at 50% 45%, transparent 52%, rgba(5, 7, 6, 0.68) 100%), linear-gradient(180deg, transparent 62%, rgba(5, 7, 6, 0.88) 100%);
+    }
+    .photo-bar {
+      position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 3;
+      display: flex; justify-content: space-between; align-items: center; padding: 11px 15px;
+      border-radius: 13px; background: rgba(8, 12, 10, 0.8); backdrop-filter: blur(14px);
+      border: 1px solid rgba(198, 222, 201, 0.22); font-size: 12px;
+    }
+    .photo-bar span:last-child { color: var(--sage-hi); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+    /* ПОДВАЛ */
+    footer { padding: 72px 0 46px; border-top: 1px solid rgba(168, 198, 175, 0.09); background: linear-gradient(180deg, transparent, rgba(8, 12, 10, 0.85)); }
+    .foot-cols { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid rgba(168, 198, 175, 0.08); }
+    .foot-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+    .foot-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .foot-btn {
+      background: none; border: none; padding: 0; font-family: var(--sans); font-size: 14px; font-weight: 300;
+      color: var(--muted); cursor: pointer; text-align: left; display: inline-flex; align-items: center; gap: 8px;
+      transition: color .25s, transform .25s;
+    }
+    .foot-btn:hover { color: var(--sage-hi); transform: translateX(4px); }
+    .foot-right { text-align: right; }
+    .foot-right p { font-size: 13px; color: var(--dim); margin: 6px 0 16px; }
+    .foot-bot { padding-top: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; font-size: 12px; color: var(--dim); }
+    .foot-bot a, .foot-bot button { background: none; border: none; font-family: var(--sans); font-size: 12px; color: var(--dim); text-decoration: none; cursor: pointer; margin-right: 18px; }
+    .foot-bot a:hover, .foot-bot button:hover { color: var(--sage-hi); }
+
+    /* ВЫДВИЖНАЯ ПЛАШКА */
+    .backdrop {
+      position: fixed; inset: 0; background: rgba(3, 4, 3, 0.82); backdrop-filter: blur(12px);
+      z-index: 800; opacity: 0; pointer-events: none; transition: opacity .35s var(--ease);
+    }
+    .backdrop.open { opacity: 1; pointer-events: auto; }
+
+    .drawer {
+      position: fixed; top: 16px; right: 16px; bottom: 16px; width: min(520px, calc(100vw - 32px));
+      background: #090D0B; border: 1px solid rgba(198, 222, 201, 0.25); border-radius: 26px; padding: 34px 30px;
+      z-index: 850; overflow-y: auto; transform: translateX(calc(100% + 32px));
+      transition: transform .5s var(--ease); box-shadow: -24px 0 80px rgba(0, 0, 0, 0.9);
+      display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
+    }
+    .drawer.open { transform: translateX(0); }
+    .dr-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid rgba(168, 198, 175, 0.1); }
+    .dr-badge { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); }
+    .dr-close { width: 34px; height: 34px; border-radius: 50%; background: rgba(148, 179, 155, 0.1); border: 1px solid rgba(168, 198, 175, 0.22); color: var(--text); cursor: pointer; }
+    .dr-close:hover { background: var(--sage-hi); color: var(--bg); }
+    .dr-title { font-family: var(--serif); font-size: 34px; font-weight: 500; line-height: 1.08; margin: 16px 0 12px; }
+    .dr-lead { font-size: 14.5px; font-weight: 300; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+    .dr-box { border-radius: 18px; padding: 16px; background: rgba(5, 7, 6, 0.85); border: 1px solid rgba(168, 198, 175, 0.18); margin-bottom: 20px; }
+    .dr-box-lbl { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage); margin-bottom: 10px; display: block; }
+    .dr-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .dr-list li { position: relative; padding-left: 18px; font-size: 14px; line-height: 1.55; }
+    .dr-list li::before { content: "✦"; position: absolute; left: 0; font-size: 11px; color: var(--sage-hi); }
 
-    /* TOAST УВЕДОМЛЕНИЕ */
     .toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      padding: 14px 20px;
-      border-radius: 14px;
-      background: #121A15;
-      border: 1px solid var(--sage-primary);
-      color: var(--sage-bright);
-      font-size: 13px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-      transform: translateY(120%);
-      opacity: 0;
-      transition: all 0.4s var(--ease-out-expo);
-      z-index: 900;
+      position: fixed; bottom: 24px; right: 24px; padding: 13px 18px; border-radius: 13px;
+      background: #0D1410; border: 1px solid var(--sage-hi); color: var(--sage-hi); font-size: 13px;
+      transform: translateY(130%); opacity: 0; transition: all .38s var(--ease); z-index: 950;
     }
+    .toast.show { transform: translateY(0); opacity: 1; }
 
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.vis { opacity: 1; transform: none; }
+    .d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; }
+
+    @media (max-width: 1140px) {
+      .fan { overflow-x: auto; justify-content: flex-start; padding: 20px 24px 36px; gap: 16px; scrollbar-width: none; }
+      .fan::-webkit-scrollbar { display: none; }
+      .fan-card { transform: none !important; width: 260px; }
     }
-
-    /* FOOTER */
-    .site-footer {
-      padding: 48px 0 56px;
-      border-top: 1px solid rgba(163, 188, 169, 0.07);
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-    }
-
-    .footer-links a {
-      color: var(--sage-primary);
-      text-decoration: none;
-      transition: color 0.25s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--sage-bright);
-    }
-
-    /* АНИМАЦИИ ПОЯВЛЕНИЯ */
-    .reveal {
-      opacity: 0;
-      transform: translate3d(0, 26px, 0);
-      transition:
-        opacity 0.85s var(--ease-out-expo),
-        transform 0.85s var(--ease-out-expo);
-      will-change: opacity, transform;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-
-    .delay-1 { transition-delay: 0.08s; }
-    .delay-2 { transition-delay: 0.16s; }
-    .delay-3 { transition-delay: 0.24s; }
-
-    /* АДАПТИВ */
     @media (max-width: 1024px) {
-      .hero-split { grid-template-columns: 1fr; gap: 40px; }
-      .timeline-grid { grid-template-columns: repeat(2, 1fr); }
-      .header-nav { display: none; }
+      .hero-grid, .priv-grid { grid-template-columns: 1fr; gap: 38px; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+      .foot-cols { grid-template-columns: 1fr 1fr; }
+      .foot-right { text-align: left; grid-column: 1 / -1; }
     }
-
-    @media (max-width: 768px) {
-      .pillars-grid,
-      .products-grid,
-      .quiz-options,
-      .private-grid,
-      .timeline-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero { padding: 64px 0 84px; }
-      .section { padding: 78px 0; }
-      .quiz-shell { padding: 26px 20px; }
-      .sla-badge { display: none; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-      .reveal { opacity: 1; transform: none; }
+    @media (max-width: 720px) {
+      .prod-grid, .q-grid, .steps-grid, .foot-cols { grid-template-columns: 1fr; }
+      .hero { padding: 56px 0 48px; }
+      .section { padding: 72px 0; }
+      .quiz-box { padding: 24px 18px; }
+      .sla { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-  <div class="film-grain" aria-hidden="true"></div>
-  <div class="ambient-orb" aria-hidden="true"></div>
+  <div class="scroll-bar" id="scrollBar"></div>
+  <div class="grain"></div>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#" class="brand">
-        <span class="brand-main">AURLEN</span>
-        <span class="brand-sub">Community</span>
-      </a>
-
-      <nav class="header-nav" aria-label="Навигация">
-        <a href="#configurator">Подбор пакета</a>
-        <a href="#process">Этапы работы</a>
-        <a href="#products">Направления</a>
-        <a href="#faq">Вопросы</a>
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="brand"><b>AURLEN</b><span>Студия</span></a>
+      <nav>
+        <a href="#showcase">Форматы</a>
+        <a href="#configurator">Конструктор</a>
+        <a href="#products">Услуги</a>
+        <a href="#process">Этапы</a>
       </nav>
-
-      <div class="header-actions">
-        <div class="sla-badge">
-          <span class="status-dot"></span>
-          <span>Ответ в течение 15 мин</span>
-        </div>
-        <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-header">
-          <span>@wackzzy</span>
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+      <div class="header-right">
+        <div class="sla"><span class="dot"></span><span>Ответ за 15 минут</span></div>
+        <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-sm">@wackzzy ↗</a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
+    <!-- ПЕРВЫЙ ЭКРАН -->
     <section class="hero">
-      <div class="container">
-        <div class="hero-split">
-          <div>
-            <div class="eyebrow reveal">Digital &amp; Visual Studio</div>
-            <h1 class="hero-title reveal delay-1">
-              AURLEN
-              <span>Community</span>
-            </h1>
-            <p class="hero-lead reveal delay-2">
-              Создаём цельную цифровую упаковку под ключ для экспертов, брендов и проектов: разрабатываем современные сайты, функциональных Telegram-ботов и выразительное визуальное оформление.
-            </p>
-
-            <div class="hero-cta-row reveal delay-3">
-              <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-sage magnetic-btn">
-                <span>Обсудить проект в Telegram</span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-              <a href="#configurator" class="btn-ghost">Собрать свой комплект</a>
-            </div>
-            <p class="hero-note reveal delay-3">
-              Личный контакт: <strong>@wackzzy</strong> · Индивидуальный расчёт условий без навязчивых звонков
-            </p>
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow reveal">Цифровая и визуальная упаковка</div>
+          <h1 class="reveal d1">AURLEN<span>Студия</span></h1>
+          <p class="lead reveal d2">
+            Создаём цельную упаковку под ключ для экспертов, брендов и проектов: разрабатываем современные сайты, функциональных Telegram-ботов и выразительное визуальное оформление.
+          </p>
+          <div class="cta-row reveal d3">
+            <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-main">Обсудить проект в Telegram ↗</a>
+            <a href="#configurator" class="btn-ghost">Собрать свой комплект</a>
           </div>
-
-          <!-- ЖИВОЙ UI-СИМУЛЯТОР БОТА СТУДИИ -->
-          <div class="live-widget reveal delay-2" aria-label="Интерактивное превью AURLEN">
-            <div class="widget-topbar">
-              <div class="widget-bot-info">
-                <div class="widget-avatar">A</div>
-                <div>
-                  <div class="widget-bot-name">AURLEN Assistant</div>
-                  <div class="widget-bot-status">● онлайн · подбор решения</div>
-                </div>
-              </div>
-              <span class="widget-tag">Live UI</span>
-            </div>
-
-            <div class="chat-stream" id="chatStream">
-              <div class="chat-msg bot">
-                Привет. Выбери направление ниже — покажу, как мы объединяем визуал, сайт и автоматизацию в единый продукт.
-              </div>
-            </div>
-
-            <div class="inline-kb" id="chatButtons">
-              <button type="button" class="kb-btn active" data-topic="tg">Упаковка ТГК</button>
-              <button type="button" class="kb-btn" data-topic="web">Разработка сайта</button>
-              <button type="button" class="kb-btn" data-topic="bot">Telegram-бот</button>
-              <button type="button" class="kb-btn" data-topic="synergy">Комбо Synergy -30%</button>
-            </div>
-
-            <div class="live-toast-bar">
-              <span><span class="status-dot"></span> Скидки Custom и Synergy суммируются</span>
-              <span style="color: var(--sage-bright);">@wackzzy</span>
-            </div>
-          </div>
+          <p class="note reveal d3">Личный контакт: <strong>@wackzzy</strong> · Индивидуальный расчёт условий без навязчивых звонков</p>
         </div>
 
-        <!-- 3 КЛЮЧЕВЫХ ПРИНЦИПА -->
-        <div class="pillars-grid">
-          <div class="spotlight-card reveal">
-            <span class="pillar-num">01 / Эстетика</span>
-            <div class="pillar-title">Единый визуальный код</div>
-            <p class="pillar-desc">Собираем дизайн канала, бота и сайта в одной выверенной системе без разрозненных шаблонов.</p>
+        <div class="assistant-box reveal d2">
+          <div class="assistant-top">
+            <div class="assistant-id">
+              <div class="avatar-badge">A</div>
+              <div><b>Помощник AURLEN</b><span>● онлайн · подбор решения</span></div>
+            </div>
+            <span class="tag-pill">Диалог</span>
           </div>
 
-          <div class="spotlight-card reveal delay-1">
-            <span class="pillar-num">02 / Процесс</span>
-            <div class="pillar-title">Прозрачные этапы работы</div>
-            <p class="pillar-desc">Фиксируем задачу, показываем промежуточные версии и доводим каждую деталь до идеала.</p>
+          <div class="chat-log" id="chatLog">
+            <div class="msg bot">Привет. Выбери направление ниже — покажу, как мы объединяем оформление, сайт и автоматизацию в единый продукт.</div>
           </div>
 
-          <div class="spotlight-card reveal delay-2">
-            <span class="pillar-num">03 / Экосистема</span>
-            <div class="pillar-title">Комплексный запуск</div>
-            <p class="pillar-desc">Закрываем графику, фронтенд-разработку и автоматизацию Telegram в одном окне.</p>
+          <div class="kb-grid" id="chatBtns">
+            <button type="button" class="kb-btn active" data-t="tg">Оформление ТГК</button>
+            <button type="button" class="kb-btn" data-t="web">Разработка сайта</button>
+            <button type="button" class="kb-btn" data-t="bot">Telegram-бот</button>
+            <button type="button" class="kb-btn" data-t="syn">Комбо Синергия −30%</button>
+          </div>
+
+          <div class="assistant-foot">
+            <span><span class="dot"></span> Скидки за комплект и синергию суммируются</span>
+            <span style="color: var(--sage-hi);">@wackzzy</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ИНТЕРАКТИВНЫЙ КОНФИГУРАТОР (Квиз без цен) -->
+    <!-- ВЕЕР КАРТОЧЕК (100% НА РУССКОМ) -->
+    <section class="showcase" id="showcase">
+      <div class="container">
+        <div class="fan reveal">
+          <div class="fan-card sage" data-dr="site">
+            <div>
+              <span class="kicker">01 · Веб-разработка</span>
+              <h3>Сайты под ключ</h3>
+              <p>Дизайн, структура, плавные анимации и чистая адаптивная вёрстка</p>
+            </div>
+            <div class="ui-web">
+              <div class="ui-bar"><div class="ui-dots"><i></i><i></i><i></i></div><span>ваш-проект.рф</span></div>
+              <div class="ui-banner">
+                <b>Единый стиль бренда</b>
+                <span>Адаптив · Анимации · Заявки в ТГ</span>
+              </div>
+              <div class="ui-pills">
+                <div class="ui-pill"><strong>Дизайн</strong>Индивидуально</div>
+                <div class="ui-pill"><strong>Загрузка</strong>Мгновенно</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fan-card dark" data-dr="bot">
+            <div>
+              <span class="kicker">02 · Автоматизация</span>
+              <h3>Заявки сразу в Telegram</h3>
+              <p>Боты под индивидуальную задачу и сценарии вашего проекта</p>
+            </div>
+            <div class="tg-stack">
+              <div class="tg-notif"><b><span>Бот AURLEN</span><span>сейчас</span></b>Новая заявка: Полное оформление ТГК + Сайт</div>
+              <div class="tg-notif"><b><span>Бонус Синергия</span><span>активно</span></b>Скидка 30% применена к общему заказу</div>
+            </div>
+          </div>
+
+          <div class="fan-card sage" data-dr="visual">
+            <div>
+              <span class="kicker">03 · Визуальный стиль</span>
+              <h3>Единый образ бренда</h3>
+              <p>Аватарки, адаптеры, баннеры и фирменные обои для канала</p>
+            </div>
+            <div class="brand-grid">
+              <div class="b-tile t1"><span>Аватарка</span><b>Основная + Адаптер</b></div>
+              <div class="b-tile t2"><span>Баннер</span><b>Шапка профиля</b></div>
+              <div class="b-tile t3"><span>Обои ТГК</span><b>Фирменный фон</b></div>
+              <div class="b-tile t4"><span>Превью</span><b>Обложки постов</b></div>
+            </div>
+          </div>
+
+          <div class="fan-card dark" data-dr="process">
+            <div>
+              <span class="kicker">04 · Процесс</span>
+              <h3>Чёткий запуск без воды</h3>
+              <p>Прозрачные этапы от идеи до передачи всех исходников</p>
+            </div>
+            <div class="road-list">
+              <div class="road-row"><span>✓ Брифинг с @wackzzy</span><span>Этап 1</span></div>
+              <div class="road-row"><span>✓ Визуальный концепт</span><span>Этап 2</span></div>
+              <div class="road-row"><span>✓ Сборка и анимации</span><span>Этап 3</span></div>
+              <div class="road-row hi"><span>→ Передача ключей</span><span>Финал</span></div>
+            </div>
+          </div>
+
+          <div class="fan-card sage" data-dr="synergy">
+            <div>
+              <span class="kicker">05 · Умные боты</span>
+              <h3>Сценарии и воронки 24/7</h3>
+              <p>Отвечают клиентам за секунды и ведут до заявки без потерь</p>
+            </div>
+            <div class="chat-mini">
+              <div class="b-in">Нужен бот с каталогом и приёмом заявок под нашу нишу</div>
+              <div class="b-out">Соберём логику и свяжем с вашим сайтом</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="center-cta reveal d1">
+          <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-main">⚡ Получить расчёт проекта в ЛС</a>
+          <p class="note">Ответим в Telegram (<strong>@wackzzy</strong>) в течение 15 минут без навязчивых звонков</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- КОНФИГУРАТОР -->
     <section class="section" id="configurator">
       <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">Конфигуратор задачи</div>
-          <h2 class="section-title">Соберите свой комплект</h2>
-          <p class="section-subtitle">
-            Отметьте нужные направления — система автоматически рассчитает вашу выгоду по программе Custom &amp; Synergy и подготовит заявку для обсуждения в личных сообщениях.
-          </p>
+        <div class="sec-head reveal">
+          <div class="eyebrow">Конструктор задачи</div>
+          <h2>Соберите свой комплект</h2>
+          <p class="sec-sub">Отметьте нужные направления — система автоматически рассчитает вашу выгоду и подготовит готовую сводку для отправки в личные сообщения @wackzzy.</p>
         </div>
 
-        <div class="quiz-shell reveal delay-1" id="quizApp">
-          <div class="quiz-header">
-            <span class="quiz-step-label" id="quizStepLabel">Шаг 1 из 3 · Формат проекта</span>
-            <div class="synergy-meter" id="synergyMeter">
-              <span class="status-dot"></span>
-              <span id="synergyText">Базовый режим · выберите задачи</span>
-            </div>
+        <div class="quiz-box reveal d1">
+          <div class="quiz-top">
+            <span class="step-lbl" id="qStep">Шаг 1 из 3 · Формат проекта</span>
+            <div class="meter"><span class="dot"></span><span id="qMeter">Базовый режим · выберите задачи</span></div>
           </div>
-
-          <div class="quiz-progress-track">
-            <div class="quiz-progress-fill" id="quizProgressFill"></div>
-          </div>
-
-          <div id="quizBody"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ЭТАПЫ РАБОТЫ -->
-    <section class="section" id="process">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">Архитектура запуска</div>
-          <h2 class="section-title">Как строится работа</h2>
-          <p class="section-subtitle">
-            Чёткий маршрут от первого сообщения в Telegram до передачи готовых файлов, исходников и работающего кода.
-          </p>
-        </div>
-
-        <div class="timeline-grid">
-          <div class="spotlight-card step-card reveal">
-            <span class="step-badge">Этап 01 · 15 мин</span>
-            <h3 class="step-title">Брифинг в Telegram</h3>
-            <p class="step-desc">Обсуждаем задачу с @wackzzy, определяем стиль, функционал и фиксируем персональные условия запуска.</p>
-          </div>
-
-          <div class="spotlight-card step-card reveal delay-1">
-            <span class="step-badge">Этап 02 · 24–48 ч</span>
-            <h3 class="step-title">Визуальный концепт</h3>
-            <p class="step-desc">Формируем палитру, типографику и первый макет оформления или прототип структуры сайта и бота.</p>
-          </div>
-
-          <div class="spotlight-card step-card reveal delay-2">
-            <span class="step-badge">Этап 03 · Сборка</span>
-            <h3 class="step-title">Разработка и полировка</h3>
-            <p class="step-desc">Отрисовываем графику, верстаем адаптивный интерфейс, подключаем логику бота и анимации.</p>
-          </div>
-
-          <div class="spotlight-card step-card reveal delay-3">
-            <span class="step-badge">Этап 04 · Финал</span>
-            <h3 class="step-title">Передача ключей</h3>
-            <p class="step-desc">Отдаём все исходники, доступы, помогаем с запуском и остаёмся на связи для дальнейшего развития.</p>
-          </div>
+          <div class="prog-track"><div class="prog-fill" id="qFill"></div></div>
+          <div id="qBody"></div>
         </div>
       </div>
     </section>
@@ -1296,59 +654,47 @@
     <!-- НАШИ ПРОДУКТЫ -->
     <section class="section" id="products">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="sec-head reveal">
           <div class="eyebrow">Направления и условия</div>
-          <h2 class="section-title">Наши Продукты</h2>
-          <p class="section-subtitle">
-            Стоимость рассчитывается индивидуально под объём и сложность вашей задачи — напишите в Telegram для точной оценки.
-          </p>
+          <h2>Наши Продукты</h2>
+          <p class="sec-sub">Стоимость рассчитывается индивидуально в личных сообщениях @wackzzy под объём и сложность вашей задачи.</p>
         </div>
 
-        <div class="products-grid">
-          <article class="spotlight-card product-card reveal">
-            <div class="product-top">
-              <h3 class="product-title">Отдельные заказы</h3>
-              <span class="product-tag">Single</span>
-            </div>
-            <ul class="product-list">
+        <div class="prod-grid">
+          <article class="card reveal">
+            <div class="prod-head"><h3>Отдельные заказы</h3><span class="tag-pill">Разово</span></div>
+            <ul class="prod-list">
               <li>Создание аватарки</li>
               <li>Создание обоев</li>
               <li>Создание превью</li>
               <li>Создание баннера</li>
+              <li><strong>Разработка сайта</strong> под индивидуальную тему и задачи</li>
+              <li><strong>Разработка Telegram-бота</strong> под индивидуальный сценарий</li>
               <li>Любая другая графическая и цифровая задача под ваш запрос</li>
             </ul>
           </article>
 
-          <article class="spotlight-card product-card reveal delay-1">
-            <div class="product-top">
-              <h3 class="product-title">Комплекты работ</h3>
-              <span class="product-tag">Packs</span>
-            </div>
-            <ul class="product-list">
+          <article class="card reveal d1">
+            <div class="prod-head"><h3>Комплекты работ</h3><span class="tag-pill">Наборы</span></div>
+            <ul class="prod-list">
               <li><strong>Полное оформление:</strong> аватарка, аватарка для адаптера, баннер, обои для ТГК</li>
               <li><strong>Оформление ТГК:</strong> аватарка канала и фирменные обои</li>
               <li><strong>Оформление профиля:</strong> аватарка, аватарка адаптера и баннер</li>
             </ul>
           </article>
 
-          <article class="spotlight-card product-card reveal">
-            <div class="product-top">
-              <h3 class="product-title">Сформируй комплект</h3>
-              <span class="product-tag">Custom</span>
-            </div>
-            <ul class="product-list">
+          <article class="card reveal">
+            <div class="prod-head"><h3>Сформируй комплект</h3><span class="tag-pill">Свой набор</span></div>
+            <ul class="prod-list">
               <li>Выбор двух задач в одном заказе — <strong>скидка 20%</strong></li>
               <li>Выбор трёх задач в одном заказе — <strong>скидка 30%</strong></li>
               <li>Четыре и более задачи — <strong>персональная скидка</strong></li>
             </ul>
           </article>
 
-          <article class="spotlight-card product-card reveal delay-1">
-            <div class="product-top">
-              <h3 class="product-title">Комплексный запуск</h3>
-              <span class="product-tag">Synergy</span>
-            </div>
-            <ul class="product-list">
+          <article class="card reveal d1">
+            <div class="prod-head"><h3>Комплексный запуск</h3><span class="tag-pill">Синергия</span></div>
+            <ul class="prod-list">
               <li>При заказе дизайна ТГК параллельно с разработкой бота или сайта</li>
               <li>При подключении одного смежного направления — <strong>скидка 20%</strong></li>
               <li>При подключении двух направлений — <strong>скидка 30%</strong></li>
@@ -1359,390 +705,408 @@
       </div>
     </section>
 
-    <!-- AURLEN PRIVATE -->
-    <section class="section">
-      <div class="container private-grid">
-        <div class="private-text reveal">
-          <div class="eyebrow">Экосистема и комьюнити</div>
-          <h2 class="section-title" style="margin-bottom: 22px;">AURLEN PRIVATE</h2>
-          <p>
-            В нашем закрытом Telegram-канале мы делимся рабочими процессами, показываем свежие релизы дизайна, разбираем архитектуру ботов и публикуем актуальные условия для запуска проектов.
-          </p>
-          <p>
-            Чтобы сразу обсудить задачу и узнать стоимость под ваш проект — пишите напрямую в личные сообщения.
-          </p>
-
-          <div class="private-btns">
-            <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-sage magnetic-btn">
-              <span>Написать @wackzzy</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-            <a href="https://t.me/+ccVZIC5RgEI5MDdi" target="_blank" rel="noopener noreferrer" class="btn-ghost">
-              <span>Telegram-канал сообщества</span>
-            </a>
-          </div>
+    <!-- ЭТАПЫ РАБОТЫ -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Порядок запуска</div>
+          <h2>Как строится работа</h2>
+          <p class="sec-sub">Чёткий маршрут от первого сообщения в Telegram до передачи готовых файлов, исходников и работающего кода.</p>
         </div>
 
-        <div class="visual-frame reveal delay-2">
-          <img src="image_e5dc27.jpg" alt="AURLEN COMMUNITY Visual" loading="lazy" decoding="async" />
+        <div class="steps-grid">
+          <div class="card reveal"><span class="step-tag">Этап 01 · 15 мин</span><h3>Брифинг в Telegram</h3><p>Обсуждаем задачу с @wackzzy, определяем стиль, функционал и фиксируем персональные условия.</p></div>
+          <div class="card reveal d1"><span class="step-tag">Этап 02 · 24–48 ч</span><h3>Визуальный концепт</h3><p>Формируем палитру, шрифты и первый макет оформления или прототип структуры сайта и бота.</p></div>
+          <div class="card reveal d2"><span class="step-tag">Этап 03 · Сборка</span><h3>Разработка и полировка</h3><p>Отрисовываем графику, верстаем адаптивный интерфейс, подключаем логику бота и анимации.</p></div>
+          <div class="card reveal d3"><span class="step-tag">Этап 04 · Финал</span><h3>Передача ключей</h3><p>Отдаём все исходники, доступы, помогаем с запуском и остаёмся на связи для развития проекта.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">Частые вопросы</div>
-          <h2 class="section-title">Ответы перед стартом</h2>
+    <!-- СООБЩЕСТВО -->
+    <section class="section">
+      <div class="container priv-grid">
+        <div class="reveal">
+          <div class="eyebrow">Экосистема и комьюнити</div>
+          <h2>Закрытый канал AURLEN</h2>
+          <p>В нашем Telegram-канале мы делимся рабочими процессами, показываем свежие релизы дизайна, разбираем архитектуру ботов и публикуем актуальные условия для запуска проектов.</p>
+          <p>Чтобы сразу обсудить задачу и узнать стоимость под ваш проект — пишите напрямую в личные сообщения.</p>
+          <div class="cta-row" style="margin-top: 28px;">
+            <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-main">Написать @wackzzy ↗</a>
+            <a href="https://t.me/+ccVZIC5RgEI5MDdi" target="_blank" rel="noopener noreferrer" class="btn-ghost">Telegram-канал студии</a>
+          </div>
         </div>
 
-        <div class="faq-list reveal delay-1">
-          <div class="faq-item open">
-            <button type="button" class="faq-trigger">
-              <span>Как узнать точную стоимость моего проекта?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <div class="faq-content">
-                <p>Мы не ставим шаблонный прайс, так как каждая задача отличается по глубине проработки и функционалу. Напишите в личные сообщения @wackzzy или соберите конфигурацию в блоке выше — мы оценим объём за 15 минут и назовём финальные условия.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button type="button" class="faq-trigger">
-              <span>Как работают и суммируются скидки Custom и Synergy?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <div class="faq-content">
-                <p>При объединении нескольких графических задач в одном заказе активируется скидка Custom (20% за 2 задачи, 30% за 3 задачи). Если к оформлению подключается разработка сайта или Telegram-бота — добавляется бонус Synergy. Все скидки суммируются при расчёте итогового пакета.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button type="button" class="faq-trigger">
-              <span>Что нужно от меня для начала работы?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <div class="faq-content">
-                <p>Достаточно коротко описать идею или прислать ссылку на ваш канал/проект. Если нет готового ТЗ или референсов — поможем сформировать концепцию и визуальный стиль с нуля.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button type="button" class="faq-trigger">
-              <span>В каком виде вы передаёте готовый результат?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-body">
-              <div class="faq-content">
-                <p>По дизайну — готовые файлы в максимальном разрешении, адаптированные под требования Telegram и соцсетей, плюс исходники по запросу. По сайтам и ботам — чистый код, помощь с деплоем на хостинг/сервер и инструкция по управлению.</p>
-              </div>
-            </div>
+        <div class="photo-card reveal d2">
+          <div class="photo-in">
+            <img src="image_e5dc27.jpg" alt="AURLEN" loading="lazy" decoding="async" />
+            <div class="photo-bar"><span>AURLEN</span><span>Закрытый доступ</span></div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span>AURLEN COMMUNITY © 2026</span>
-      <div class="footer-links">
-        <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer">Личка: @wackzzy</a>
-        <a href="https://t.me/+ccVZIC5RgEI5MDdi" target="_blank" rel="noopener noreferrer">Канал AURLEN</a>
+  <!-- ПОДВАЛ С КЛИКАБЕЛЬНЫМИ ПЛАШКАМИ -->
+  <footer>
+    <div class="container">
+      <div class="foot-cols">
+        <div>
+          <div class="foot-title">Услуги</div>
+          <ul class="foot-list">
+            <li><button type="button" class="foot-btn" data-dr="site">Разработка сайта под ключ →</button></li>
+            <li><button type="button" class="foot-btn" data-dr="bot">Telegram-бот под индивидуальную тему →</button></li>
+            <li><button type="button" class="foot-btn" data-dr="visual">Оформление ТГК и профиля →</button></li>
+            <li><button type="button" class="foot-btn" data-dr="packs">Готовые комплекты оформления →</button></li>
+            <li><button type="button" class="foot-btn" data-dr="synergy">Комплексный запуск «Синергия» →</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="foot-title">Студия</div>
+          <ul class="foot-list">
+            <li><button type="button" class="foot-btn" data-dr="cases">Кейсы и визуальные концепты →</button></li>
+            <li><button type="button" class="foot-btn" data-dr="custom">Система скидок и суммирование →</button></li>
+            <li><button type="button" class="foot-btn" data-dr="process">Этапы и стандарты работы →</button></li>
+            <li><button type="button" class="foot-btn" data-dr="faq">Частые вопросы перед стартом →</button></li>
+          </ul>
+        </div>
+
+        <div class="foot-right">
+          <div style="font-size: 14px; color: var(--muted);">© 2026 AURLEN</div>
+          <p>Сайты, Telegram-боты и визуальная упаковка под ключ</p>
+          <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-sm">Личка: @wackzzy ↗</a>
+        </div>
+      </div>
+
+      <div class="foot-bot">
+        <div>
+          <a href="https://t.me/+ccVZIC5RgEI5MDdi" target="_blank" rel="noopener noreferrer">Официальный Telegram-канал</a>
+          <button type="button" data-dr="custom">Условия суммирования скидок</button>
+          <span>Стоимость рассчитывается индивидуально в ЛС</span>
+        </div>
+        <span>Студия AURLEN</span>
       </div>
     </div>
   </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- ВЫДВИЖНАЯ ПЛАШКА -->
+  <div class="backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div>
+      <div class="dr-top">
+        <span class="dr-badge" id="drBadge"></span>
+        <button type="button" class="dr-close" id="drClose" aria-label="Закрыть">✕</button>
+      </div>
+      <h3 class="dr-title" id="drTitle"></h3>
+      <p class="dr-lead" id="drLead"></p>
+      <div class="dr-box" id="drBox"></div>
+      <ul class="dr-list" id="drList"></ul>
+    </div>
+    <div style="padding-top: 16px; border-top: 1px solid rgba(168, 198, 175, 0.1);">
+      <a href="https://t.me/wackzzy" target="_blank" rel="noopener noreferrer" class="btn-main" id="drCta" style="width: 100%;">Обсудить с @wackzzy в Telegram →</a>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
 
   <script>
     (() => {
-      // 1. IntersectionObserver для плавного появления блоков
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            obs.unobserve(entry.target);
-          }
+      // Плавное появление при скролле
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-      // 2. Полоса прогресса скролла (rAF)
-      const progressEl = document.getElementById('scrollProgress');
-      let ticking = false;
+      // Полоса прогресса скролла
+      const bar = document.getElementById('scrollBar');
+      let tick = false;
       window.addEventListener('scroll', () => {
-        if (!ticking) {
+        if (!tick) {
           requestAnimationFrame(() => {
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? window.scrollY / docHeight : 0;
-            progressEl.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
-            ticking = false;
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.transform = `scaleX(${h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0})`;
+            tick = false;
           });
-          ticking = true;
+          tick = true;
         }
       }, { passive: true });
 
-      // 3. Spotlight & Магнитные кнопки
+      // Подсветка карточек под курсором
       if (window.matchMedia('(pointer: fine)').matches) {
-        document.querySelectorAll('.spotlight-card').forEach((card) => {
-          card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        document.querySelectorAll('.card').forEach(c => {
+          c.addEventListener('mousemove', e => {
+            const r = c.getBoundingClientRect();
+            c.style.setProperty('--mx', `${e.clientX - r.left}px`);
+            c.style.setProperty('--my', `${e.clientY - r.top}px`);
           }, { passive: true });
         });
-
-        document.querySelectorAll('.magnetic-btn').forEach((btn) => {
-          btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = (e.clientX - rect.left - rect.width / 2) * 0.16;
-            const y = (e.clientY - rect.top - rect.height / 2) * 0.22;
-            btn.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-          });
-          btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate3d(0, 0, 0)';
-          });
-        });
       }
 
-      // 4. Интерактивный бот-симулятор в Hero
-      const chatResponses = {
-        tg: {
-          user: 'Интересует упаковка Telegram-канала',
-          bot: 'Собираем цельный визуальный стиль: <strong>аватарка, адаптер, баннер и фирменные обои</strong>. Без шаблонов — под характер вашего канала.'
-        },
-        web: {
-          user: 'Нужен современный сайт под ключ',
-          bot: 'Проектируем и верстаем быстрые лендинги и промо-сайты с <strong>премиальной типографикой, анимациями</strong> и прямым выводом заявок в Telegram.'
+      // Диалог помощника в первом экране
+      const replies = {
+        tg: ['Интересует оформление Telegram-канала', 'Собираем цельный визуальный стиль: <strong>аватарка, адаптер, баннер и фирменные обои</strong>. Без шаблонов — под характер вашего канала.'],
+        web: ['Нужен современный сайт под ключ', 'Проектируем и верстаем быстрые сайты с <strong>продуманной структурой, плавными анимациями</strong> и прямым выводом заявок в Telegram.'],
+        bot: ['Хочу Telegram-бота под индивидуальную тему', 'Создаём ботов под любые сценарии: <strong>воронки, каталоги, приём заявок, интеграции и кастомная логика</strong>. Стабильная работа и удобное меню.'],
+        syn: ['Что даёт комбо Синергия?', 'При заказе дизайна вместе с сайтом или ботом вы получаете <strong>единый визуальный код и скидку до 30%</strong>, которая суммируется с бонусами комплекта.']
+      };
+      const chatLog = document.getElementById('chatLog');
+      document.getElementById('chatBtns').addEventListener('click', e => {
+        const b = e.target.closest('.kb-btn');
+        if (!b) return;
+        document.querySelectorAll('.kb-btn').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        const [u, bot] = replies[b.dataset.t];
+        chatLog.innerHTML = `<div class="msg user">${u}</div><div class="msg bot">${bot}</div>`;
+      });
+
+      // Данные для выдвижной плашки
+      const drData = {
+        site: {
+          badge: 'Разово · Разработка',
+          title: 'Разработка сайта под индивидуальную тему',
+          lead: 'Проектируем и собираем сайты, которые выглядят дорого, загружаются мгновенно и переводят посетителей сразу в диалог в Telegram.',
+          lbl: 'Пример архитектуры сайта',
+          box: `<div class="ui-web"><div class="ui-bar"><div class="ui-dots"><i></i><i></i><i></i></div><span>ваш-проект.рф</span></div><div class="ui-banner"><b>Единый визуальный код бренда</b><span>Адаптация · Анимации · Заявки в ТГ</span></div><div class="ui-pills"><div class="ui-pill"><strong>Дизайн</strong>Под вашу нишу</div><div class="ui-pill"><strong>Код</strong>Без конструкторов</div></div></div>`,
+          items: [
+            'Индивидуальный визуальный стиль под вашу нишу без шаблонов',
+            'Плавные анимации, интерактивные блоки и адаптация под все экраны',
+            'Прямая связка кнопок и заявок с вашим Telegram или ботом',
+            'Чистый оптимизированный код и помощь с публикацией'
+          ],
+          tg: 'Привет! Хочу обсудить разработку сайта под индивидуальную тему.'
         },
         bot: {
-          user: 'Хочу автоматизацию и Telegram-бота',
-          bot: 'Создаём ботов под любые сценарии: <strong>воронки, каталоги, приём заявок и интеграции</strong>. Стабильная архитектура и чистый интерфейс.'
+          badge: 'Разово · Автоматизация',
+          title: 'Telegram-бот под индивидуальную тему',
+          lead: 'Создаём функциональных ботов под ваши задачи: от приёма заявок и каталогов до сложных воронок и интеграций.',
+          lbl: 'Симуляция работы бота',
+          box: `<div class="tg-stack"><div class="tg-notif"><b><span>Входящая заявка</span><span>мгновенно</span></b>Клиент прошёл сценарий и оставил запрос</div><div class="tg-notif"><b><span>Управление</span><span>Telegram</span></b>Полный контроль над заявками в одном окне</div></div>`,
+          items: [
+            'Продуманная логика меню, кнопок и сценариев общения с клиентом',
+            'Мгновенная отправка заявок и данных вам в личку или закрытый чат',
+            'Интеграция с таблицами, внешними сервисами и вашим сайтом',
+            'Помощь с запуском на сервере и дальнейшая поддержка'
+          ],
+          tg: 'Привет! Нужен Telegram-бот под индивидуальную задачу, давай обсудим.'
+        },
+        visual: {
+          badge: 'Оформление · Дизайн',
+          title: 'Оформление ТГК и профиля',
+          lead: 'Собираем цельный визуальный образ: аватарки, аватарки для адаптеров, фирменные обои для канала, баннеры и обложки.',
+          lbl: 'Элементы визуальной упаковки',
+          box: `<div class="brand-grid"><div class="b-tile t1"><span>Аватарка</span><b>Основная + Адаптер</b></div><div class="b-tile t2"><span>Баннер</span><b>Шапка профиля</b></div><div class="b-tile t3"><span>Обои ТГК</span><b>Фирменный фон</b></div><div class="b-tile t4"><span>Превью</span><b>Обложки постов</b></div></div>`,
+          items: [
+            'Создание главной аватарки и отдельной версии под адаптер',
+            'Фирменные обои для Telegram-канала, которые не перекрывают текст постов',
+            'Баннеры и превью в единой типографике и цветовой палитре',
+            'Передача файлов в максимальном качестве под все требования площадок'
+          ],
+          tg: 'Привет! Интересует визуальное оформление канала / профиля.'
+        },
+        packs: {
+          badge: 'Наборы · Готовые решения',
+          title: 'Комплекты работ',
+          lead: 'Сбалансированные наборы оформления для быстрого и цельного запуска канала или личного бренда.',
+          lbl: 'Доступные комплекты',
+          box: `<div class="road-list"><div class="road-row hi"><span>Полное оформление</span><span>Аватар + Адаптер + Баннер + Обои</span></div><div class="road-row"><span>Оформление ТГК</span><span>Аватарка канала + Фирменные обои</span></div><div class="road-row"><span>Оформление профиля</span><span>Аватарка + Адаптер + Баннер</span></div></div>`,
+          items: [
+            'Полное оформление: закрывает все визуальные точки касания за один заказ',
+            'Оформление ТГК: идеальная база для запуска или обновления канала',
+            'Оформление профиля: строгая и узнаваемая подача эксперта или менеджера',
+            'Выгоднее, чем заказывать каждую позицию по отдельности'
+          ],
+          tg: 'Привет! Хочу подобрать комплект оформления.'
         },
         synergy: {
-          user: 'Что даёт комбо Synergy?',
-          bot: 'При заказе дизайна вместе с сайтом или ботом вы получаете <strong>единый визуальный код и скидку до 30%</strong>, которая суммируется с бонусами комплекта.'
-        }
-      };
-
-      const chatStream = document.getElementById('chatStream');
-      document.getElementById('chatButtons').addEventListener('click', (e) => {
-        const btn = e.target.closest('.kb-btn');
-        if (!btn) return;
-        document.querySelectorAll('.kb-btn').forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const data = chatResponses[btn.dataset.topic];
-        if (!data) return;
-
-        chatStream.innerHTML = `
-          <div class="chat-msg user">${data.user}</div>
-          <div class="chat-msg bot">${data.bot}</div>
-        `;
-      });
-
-      // 5. Интерактивный пошаговый квиз-конфигуратор (без цен)
-      const quizState = {
-        step: 1,
-        projectType: 'Telegram-канал / Блог',
-        services: ['Аватарка, баннер и обои ТГК'],
-        pace: 'Стандартный запуск'
-      };
-
-      const stepsData = {
-        1: {
-          label: 'Шаг 1 из 3 · Направление проекта',
-          question: 'Что будем упаковывать или запускать?',
-          hint: 'Выберите основной формат вашего проекта',
-          multi: false,
-          key: 'projectType',
-          options: [
-            { title: 'Telegram-канал / Блог', sub: 'Авторский канал, медиа или закрытое комьюнити' },
-            { title: 'Личный бренд / Эксперт', sub: 'Единая подача в соцсетях, сайт-визитка и бот' },
-            { title: 'Локальный бизнес / Магазин', sub: 'Каталог, приём заказов и автоматизация в ТГ' },
-            { title: 'Стартап / Цифровой сервис', sub: 'Промо-сайт, айдентика и архитектура продукта' }
-          ]
+          badge: 'Синергия · Максимальная выгода',
+          title: 'Комплексный запуск «Синергия»',
+          lead: 'Объединяем дизайн Telegram-канала с разработкой сайта или бота в одном окне — с единым визуальным кодом и суммируемыми скидками.',
+          lbl: 'Механика бонусов',
+          box: `<div class="tg-stack"><div class="tg-notif"><b><span>Дизайн + 1 направление</span><span>−20%</span></b>Сайт или Telegram-бот в единой стилистике</div><div class="tg-notif"><b><span>Дизайн + 2 направления</span><span>−30%</span></b>Сайт + Бот + суммирование со скидками комплекта</div></div>`,
+          items: [
+            'Сайт, бот и Telegram-канал выглядят как единая экосистема одного уровня',
+            'При подключении одного смежного направления — скидка 20%',
+            'При подключении двух направлений — скидка 30%',
+            'Все скидки за комплект и синергию суммируются'
+          ],
+          tg: 'Привет! Интересует комплексный запуск «Синергия» (дизайн + разработка).'
         },
-        2: {
-          label: 'Шаг 2 из 3 · Состав комплекта',
-          question: 'Какие задачи включим в работу?',
-          hint: 'Можно выбрать несколько пунктов — скидка пересчитается автоматически',
-          multi: true,
-          key: 'services',
-          options: [
-            { title: 'Аватарка, баннер и обои ТГК', sub: 'Полное визуальное оформление профиля и канала', type: 'design' },
-            { title: 'Превью, обложки и графика', sub: 'Фирменные шаблоны постов и визуальные материалы', type: 'design' },
-            { title: 'Разработка сайта под ключ', sub: 'Лендинг или многостраничный сайт с анимациями', type: 'dev' },
-            { title: 'Разработка Telegram-бота', sub: 'Автоворонка, каталог, заявки или кастомная логика', type: 'dev' }
-          ]
+        cases: {
+          badge: 'Примеры · Концепты',
+          title: 'Кейсы и визуальные концепты',
+          lead: 'Раздел с подробными разборами клиентских проектов сейчас наполняется. В личных сообщениях @wackzzy уже можно запросить актуальные примеры работ под вашу нишу.',
+          lbl: 'Активные направления релизов',
+          box: `<div class="brand-grid"><div class="b-tile t1"><span>Сайты</span><b>Лендинги и промо</b></div><div class="b-tile t2"><span>Боты</span><b>Автоматизация ТГ</b></div><div class="b-tile t3"><span>Оформление</span><b>Каналы и профили</b></div><div class="b-tile t4"><span>Комплекс</span><b>Единый запуск</b></div></div>`,
+          items: [
+            'Упаковка авторских и коммерческих Telegram-каналов под ключ',
+            'Разработка быстрых сайтов с плавными анимациями',
+            'Создание Telegram-ботов для приёма заявок, каталогов и воронок',
+            'Напишите @wackzzy — покажем свежие примеры под вашу задачу'
+          ],
+          tg: 'Привет! Покажи, пожалуйста, примеры ваших работ и концептов.'
         },
-        3: {
-          label: 'Шаг 3 из 3 · Темп реализации',
-          question: 'Какой формат запуска комфортнее?',
-          hint: 'Подстроим график под ваши дедлайны',
-          multi: false,
-          key: 'pace',
-          options: [
-            { title: 'Стандартный запуск', sub: 'Поэтапная проработка с промежуточными согласованиями' },
-            { title: 'Приоритетный запуск', sub: 'Ускоренная сборка проекта в сжатые сроки' }
-          ]
+        custom: {
+          badge: 'Условия · Скидки',
+          title: 'Система скидок и суммирование',
+          lead: 'Чем больше задач вы объединяете в одном заказе, тем выгоднее итоговые условия. Скидки за количество задач и за синергию направлений суммируются.',
+          lbl: 'Сетка бонусов',
+          box: `<div class="road-list"><div class="road-row"><span>2 задачи в заказе</span><span>Скидка 20%</span></div><div class="road-row"><span>3 задачи в заказе</span><span>Скидка 30%</span></div><div class="road-row hi"><span>4+ задач или Синергия</span><span>Персонально + суммирование</span></div></div>`,
+          items: [
+            'Выбор двух задач в одном заказе — скидка 20%',
+            'Выбор трёх задач в одном заказе — скидка 30%',
+            'Четыре и более задачи — персональные условия',
+            'Скидки за комплект и за связку «Дизайн + Сайт/Бот» суммируются'
+          ],
+          tg: 'Привет! Хочу рассчитать заказ со скидкой.'
+        },
+        process: {
+          badge: 'Порядок · Стандарты',
+          title: 'Этапы и стандарты работы',
+          lead: 'Мы строим работу прозрачно: вы видите каждый шаг сборки и влияете на результат до финальной сдачи.',
+          lbl: 'Маршрут проекта',
+          box: `<div class="road-list"><div class="road-row"><span>01. Брифинг и фиксация условий</span><span>15 минут</span></div><div class="road-row"><span>02. Визуальный код и прототип</span><span>24–48 часов</span></div><div class="road-row hi"><span>03–04. Сборка и передача ключей</span><span>Под ключ</span></div></div>`,
+          items: [
+            'Быстрый старт: обсуждаем задачу в Telegram без долгих созвонов',
+            'Согласовываем визуальный стиль и структуру до основной сборки',
+            'Показываем промежуточные этапы и вносим точечные правки',
+            'Передаём все готовые файлы, исходники и инструкции по запуску'
+          ],
+          tg: 'Привет! Хочу обсудить старт проекта.'
+        },
+        faq: {
+          badge: 'Вопросы · Ответы',
+          title: 'Частые вопросы перед стартом',
+          lead: 'Собрали ключевые ответы о том, как проходит оценка, запуск и передача готовых проектов.',
+          lbl: 'Главное об условиях',
+          box: `<div class="tg-stack"><div class="tg-notif"><b><span>Индивидуальная оценка в ЛС</span><span>15 мин</span></b>Стоимость зависит от объёма и рассчитывается лично @wackzzy</div></div>`,
+          items: [
+            'Цена рассчитывается индивидуально под вашу задачу в личных сообщениях',
+            'Для старта достаточно идеи или ссылки на канал — поможем составить концепт',
+            'Можно заказать одну услугу или собрать комбо со скидками',
+            'Все исходники и готовые файлы передаются вам после завершения работы'
+          ],
+          tg: 'Привет! Есть пара вопросов по запуску проекта.'
         }
       };
 
-      const quizBody = document.getElementById('quizBody');
-      const quizStepLabel = document.getElementById('quizStepLabel');
-      const quizProgressFill = document.getElementById('quizProgressFill');
-      const synergyText = document.getElementById('synergyText');
+      const backdrop = document.getElementById('backdrop');
+      const drawer = document.getElementById('drawer');
+      const closeDr = () => { backdrop.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = ''; };
 
-      function calcSynergy() {
-        const count = quizState.services.length;
-        const hasDesign = quizState.services.some((s) => s.includes('Аватарка') || s.includes('Превью'));
-        const devCount = quizState.services.filter((s) => s.includes('сайта') || s.includes('бота')).length;
-
-        if (count === 0) return 'Выберите хотя бы одну задачу';
-        if (hasDesign && devCount === 2) return 'Synergy Max: скидка 30% + суммирование бонусов';
-        if (hasDesign && devCount === 1) return 'Synergy 20% + бонус комплекта активированы';
-        if (count >= 4) return 'Custom Max: персональная максимальная скидка';
-        if (count === 3) return 'Custom Pack: активирована скидка 30%';
-        if (count === 2) return 'Custom Pack: активирована скидка 20%';
-        return 'Single · Индивидуальный расчёт условий';
-      }
-
-      function showToast(msg) {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(window.__toastTimer);
-        window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 3400);
-      }
-
-      function renderQuiz() {
-        synergyText.textContent = calcSynergy();
-
-        if (quizState.step <= 3) {
-          const current = stepsData[quizState.step];
-          quizStepLabel.textContent = current.label;
-          quizProgressFill.style.width = `${(quizState.step / 3) * 100}%`;
-
-          const optsHtml = current.options.map((opt) => {
-            const isSelected = current.multi
-              ? quizState.services.includes(opt.title)
-              : quizState[current.key] === opt.title;
-
-            return `
-              <button type="button" class="quiz-opt ${isSelected ? 'selected' : ''}" data-val="${opt.title}">
-                <div>
-                  <div class="quiz-opt-title">${opt.title}</div>
-                  <div class="quiz-opt-sub">${opt.sub}</div>
-                </div>
-                <span class="quiz-check">✓</span>
-              </button>
-            `;
-          }).join('');
-
-          quizBody.innerHTML = `
-            <h3 class="quiz-question">${current.question}</h3>
-            <p class="quiz-hint">${current.hint}</p>
-            <div class="quiz-options">${optsHtml}</div>
-            <div class="quiz-footer">
-              ${quizState.step > 1
-                ? '<button type="button" class="btn-ghost" id="quizPrev">← Назад</button>'
-                : '<span></span>'}
-              <button type="button" class="btn-sage" id="quizNext">
-                <span>${quizState.step === 3 ? 'Сформировать заявку' : 'Далее'}</span>
-                <span>→</span>
-              </button>
-            </div>
-          `;
-
-          quizBody.querySelectorAll('.quiz-opt').forEach((btn) => {
-            btn.addEventListener('click', () => {
-              const val = btn.dataset.val;
-              if (current.multi) {
-                const idx = quizState.services.indexOf(val);
-                if (idx > -1) {
-                  if (quizState.services.length > 1) quizState.services.splice(idx, 1);
-                } else {
-                  quizState.services.push(val);
-                }
-              } else {
-                quizState[current.key] = val;
-              }
-              renderQuiz();
-            });
-          });
-
-          const prevBtn = document.getElementById('quizPrev');
-          if (prevBtn) prevBtn.addEventListener('click', () => { quizState.step--; renderQuiz(); });
-
-          document.getElementById('quizNext').addEventListener('click', () => {
-            quizState.step++;
-            renderQuiz();
-          });
-        } else {
-          quizStepLabel.textContent = 'Готово · Ваша конфигурация сформирована';
-          quizProgressFill.style.width = '100%';
-          const benefit = calcSynergy();
-
-          const summaryText = `Привет! Хочу обсудить проект в AURLEN:\n• Формат: ${quizState.projectType}\n• Состав: ${quizState.services.join(', ')}\n• Темп: ${quizState.pace}\n• Условия: ${benefit}`;
-          const tgUrl = `https://t.me/wackzzy?text=${encodeURIComponent(summaryText)}`;
-
-          quizBody.innerHTML = `
-            <h3 class="quiz-question">Конфигурация готова к отправке</h3>
-            <p class="quiz-hint">Отправьте сводку @wackzzy — обсудим детали и рассчитаем точную стоимость в личных сообщениях.</p>
-            <div class="quiz-summary-box">
-              <div class="summary-row"><span>Формат проекта</span><span>${quizState.projectType}</span></div>
-              <div class="summary-row"><span>Выбранные задачи</span><span>${quizState.services.join(' + ')}</span></div>
-              <div class="summary-row"><span>Темп запуска</span><span>${quizState.pace}</span></div>
-              <div class="summary-row"><span>Статус выгоды</span><span style="color: var(--sage-bright);">${benefit}</span></div>
-            </div>
-            <div class="quiz-footer">
-              <button type="button" class="btn-ghost" id="quizReset">Изменить параметры</button>
-              <a href="${tgUrl}" target="_blank" rel="noopener noreferrer" class="btn-sage" id="sendTgBtn">
-                <span>Отправить @wackzzy в Telegram</span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-            </div>
-          `;
-
-          document.getElementById('quizReset').addEventListener('click', () => {
-            quizState.step = 1;
-            renderQuiz();
-          });
-
-          document.getElementById('sendTgBtn').addEventListener('click', () => {
-            if (navigator.clipboard) {
-              navigator.clipboard.writeText(summaryText).catch(() => {});
-            }
-            showToast('Текст заявки скопирован · открываем @wackzzy');
-          });
-        }
-      }
-
-      renderQuiz();
-
-      // 6. Плавный FAQ-аккордеон
-      document.querySelectorAll('.faq-trigger').forEach((trigger) => {
-        trigger.addEventListener('click', () => {
-          const item = trigger.parentElement;
-          const wasOpen = item.classList.contains('open');
-          document.querySelectorAll('.faq-item').forEach((el) => el.classList.remove('open'));
-          if (!wasOpen) item.classList.add('open');
+      document.querySelectorAll('[data-dr]').forEach(el => {
+        el.addEventListener('click', () => {
+          const d = drData[el.dataset.dr];
+          if (!d) return;
+          document.getElementById('drBadge').textContent = d.badge;
+          document.getElementById('drTitle').textContent = d.title;
+          document.getElementById('drLead').textContent = d.lead;
+          document.getElementById('drBox').innerHTML = `<span class="dr-box-lbl">${d.lbl}</span>${d.box}`;
+          document.getElementById('drList').innerHTML = d.items.map(i => `<li>${i}</li>`).join('');
+          document.getElementById('drCta').href = `https://t.me/wackzzy?text=${encodeURIComponent(d.tg)}`;
+          backdrop.classList.add('open'); drawer.classList.add('open'); document.body.style.overflow = 'hidden';
         });
       });
+      document.getElementById('drClose').addEventListener('click', closeDr);
+      backdrop.addEventListener('click', closeDr);
+      window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDr(); });
+
+      // Пошаговый конфигуратор
+      const st = { step: 1, type: 'Telegram-канал / Блог', srv: ['Аватарка, баннер и обои ТГК'], pace: 'Стандартный запуск' };
+      const steps = {
+        1: { lbl: 'Шаг 1 из 3 · Направление проекта', q: 'Что будем упаковывать или запускать?', h: 'Выберите основной формат вашего проекта', m: false, k: 'type', opts: [
+          ['Telegram-канал / Блог', 'Авторский канал, медиа или закрытое комьюнити'],
+          ['Личный бренд / Эксперт', 'Единая подача в соцсетях, сайт-визитка и бот'],
+          ['Локальный бизнес / Магазин', 'Каталог, приём заказов и автоматизация в ТГ'],
+          ['Стартап / Цифровой сервис', 'Промо-сайт, айдентика и архитектура продукта']
+        ]},
+        2: { lbl: 'Шаг 2 из 3 · Состав комплекта', q: 'Какие задачи включим в работу?', h: 'Можно выбрать несколько пунктов — скидка пересчитается автоматически', m: true, k: 'srv', opts: [
+          ['Аватарка, баннер и обои ТГК', 'Полное визуальное оформление профиля и канала'],
+          ['Превью, обложки и графика', 'Фирменные шаблоны постов и визуальные материалы'],
+          ['Разработка сайта под ключ', 'Лендинг или многостраничный сайт с анимациями'],
+          ['Разработка Telegram-бота', 'Автоворонка, каталог, заявки или кастомная логика']
+        ]},
+        3: { lbl: 'Шаг 3 из 3 · Темп реализации', q: 'Какой формат запуска комфортнее?', h: 'Подстроим график под ваши дедлайны', m: false, k: 'pace', opts: [
+          ['Стандартный запуск', 'Поэтапная проработка с промежуточными согласованиями'],
+          ['Приоритетный запуск', 'Ускоренная сборка проекта в сжатые сроки']
+        ]}
+      };
+
+      const calc = () => {
+        const c = st.srv.length;
+        const des = st.srv.some(s => s.includes('Аватарка') || s.includes('Превью'));
+        const dev = st.srv.filter(s => s.includes('сайта') || s.includes('бота')).length;
+        if (des && dev === 2) return 'Синергия Макс: скидка 30% + суммирование бонусов';
+        if (des && dev === 1) return 'Синергия 20% + бонус комплекта активированы';
+        if (c >= 4) return 'Персональная максимальная скидка';
+        if (c === 3) return 'Свой набор: активирована скидка 30%';
+        if (c === 2) return 'Свой набор: активирована скидка 20%';
+        return 'Разовый заказ · Индивидуальный расчёт';
+      };
+
+      const render = () => {
+        const ben = calc();
+        document.getElementById('qMeter').textContent = ben;
+        const body = document.getElementById('qBody');
+
+        if (st.step <= 3) {
+          const cur = steps[st.step];
+          document.getElementById('qStep').textContent = cur.lbl;
+          document.getElementById('qFill').style.width = `${(st.step / 3) * 100}%`;
+
+          body.innerHTML = `
+            <h3 class="q-title">${cur.q}</h3>
+            <p class="q-hint">${cur.h}</p>
+            <div class="q-grid">${cur.opts.map(([t, s]) => {
+              const sel = cur.m ? st.srv.includes(t) : st[cur.k] === t;
+              return `<button type="button" class="q-opt ${sel ? 'sel' : ''}" data-v="${t}"><div><b>${t}</b><span>${s}</span></div><span class="chk">✓</span></button>`;
+            }).join('')}</div>
+            <div class="q-foot">
+              ${st.step > 1 ? '<button type="button" class="btn-ghost" id="qPrev">← Назад</button>' : '<span></span>'}
+              <button type="button" class="btn-main" id="qNext">${st.step === 3 ? 'Сформировать заявку →' : 'Далее →'}</button>
+            </div>`;
+
+          body.querySelectorAll('.q-opt').forEach(b => b.addEventListener('click', () => {
+            const v = b.dataset.v;
+            if (cur.m) {
+              const i = st.srv.indexOf(v);
+              if (i > -1 && st.srv.length > 1) st.srv.splice(i, 1);
+              else if (i === -1) st.srv.push(v);
+            } else st[cur.k] = v;
+            render();
+          }));
+          if (document.getElementById('qPrev')) document.getElementById('qPrev').onclick = () => { st.step--; render(); };
+          document.getElementById('qNext').onclick = () => { st.step++; render(); };
+        } else {
+          document.getElementById('qStep').textContent = 'Готово · Конфигурация сформирована';
+          document.getElementById('qFill').style.width = '100%';
+          const txt = `Привет! Хочу обсудить проект в AURLEN:\n• Формат: ${st.type}\n• Состав: ${st.srv.join(', ')}\n• Темп: ${st.pace}\n• Условия: ${ben}`;
+          body.innerHTML = `
+            <h3 class="q-title">Конфигурация готова к отправке</h3>
+            <p class="q-hint">Отправьте сводку @wackzzy — обсудим детали и рассчитаем стоимость в личных сообщениях.</p>
+            <div class="sum-box">
+              <div class="sum-row"><span>Формат проекта</span><span>${st.type}</span></div>
+              <div class="sum-row"><span>Выбранные задачи</span><span>${st.srv.join(' + ')}</span></div>
+              <div class="sum-row"><span>Темп запуска</span><span>${st.pace}</span></div>
+              <div class="sum-row"><span>Статус выгоды</span><span style="color: var(--sage-hi);">${ben}</span></div>
+            </div>
+            <div class="q-foot">
+              <button type="button" class="btn-ghost" id="qReset">Изменить параметры</button>
+              <a href="https://t.me/wackzzy?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener noreferrer" class="btn-main" id="qSend">Отправить @wackzzy в Telegram ↗</a>
+            </div>`;
+          document.getElementById('qReset').onclick = () => { st.step = 1; render(); };
+          document.getElementById('qSend').onclick = () => {
+            navigator.clipboard?.writeText(txt).catch(() => {});
+            const t = document.getElementById('toast');
+            t.textContent = 'Текст заявки скопирован · открываем @wackzzy';
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3200);
+          };
+        }
+      };
+      render();
     })();
   </script>
 </body>
