@@ -188,7 +188,7 @@
     }
     .assistant-foot span:first-child { display: inline-flex; align-items: center; gap: 8px; }
 
-    /* ВЕЕР КАРТОЧЕК (ПОЛНОСТЬЮ НА РУССКОМ) */
+    /* ВЕЕР КАРТОЧЕК */
     .showcase { padding: 20px 0 88px; overflow: hidden; }
     .fan { display: flex; justify-content: center; padding: 24px 12px 44px; }
 
@@ -376,76 +376,57 @@
     .steps-grid h3 { font-family: var(--serif); font-size: 24px; font-weight: 500; margin-bottom: 8px; line-height: 1.15; }
     .steps-grid p { font-size: 13.5px; font-weight: 300; color: var(--muted); }
 
-    /* ЗАКРЫТОЕ СООБЩЕСТВО + ФОТО */
-    /* Выравниваем текст ровно по верхнему краю карточки с фото */
-.priv-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-}
-
-.priv-grid > div:first-child {
-  padding-top: 8px;
-}
-
-/* Фикс переноса слова «ключ» в подвале */
-.foot-right {
-  text-align: right;
-  max-width: 300px;
-  justify-self: end;
-}
-
-.foot-right p {
-  font-size: 13px;
-  color: var(--dim);
-  margin: 6px 0 16px;
-  text-wrap: balance;
-}
+    /* ЗАКРЫТОЕ СООБЩЕСТВО + ФОТО 4:3 */
+    .priv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .priv-text {
+      padding-top: 6px;
+    }
+    .priv-text p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 18px;
+      max-width: 520px;
+    }
 
     .photo-card {
-  border-radius: 24px;
-  padding: 10px;
-  background: linear-gradient(155deg, rgba(198, 222, 201, 0.22), rgba(11, 16, 13, 0.94));
-  border: 1px solid rgba(198, 222, 201, 0.24);
-  box-shadow: 0 28px 65px -18px rgba(0, 0, 0, 0.9);
-  transition: transform .5s var(--ease), border-color .35s;
-}
-.photo-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--border-hi);
-}
-.photo-in {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #060807;
-}
-.photo-in img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: center;
-  transition: transform .8s var(--ease);
-}
-.photo-card:hover .photo-in img {
-  transform: scale(1.03);
-}
-    .photo-in::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(circle at 50% 45%, transparent 52%, rgba(5, 7, 6, 0.68) 100%), linear-gradient(180deg, transparent 62%, rgba(5, 7, 6, 0.88) 100%);
+      border-radius: 24px;
+      padding: 10px;
+      background: linear-gradient(155deg, rgba(198, 222, 201, 0.22), rgba(11, 16, 13, 0.94));
+      border: 1px solid rgba(198, 222, 201, 0.24);
+      box-shadow: 0 28px 65px -18px rgba(0, 0, 0, 0.9);
+      transition: transform .5s var(--ease), border-color .35s;
     }
-    .photo-bar {
-      position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 3;
-      display: flex; justify-content: space-between; align-items: center; padding: 11px 15px;
-      border-radius: 13px; background: rgba(8, 12, 10, 0.8); backdrop-filter: blur(14px);
-      border: 1px solid rgba(198, 222, 201, 0.22); font-size: 12px;
+    .photo-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hi);
     }
-    .photo-bar span:last-child { color: var(--sage-hi); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .photo-in {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #060807;
+    }
+    .photo-in img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .8s var(--ease);
+    }
+    .photo-card:hover .photo-in img {
+      transform: scale(1.03);
+    }
 
     /* ПОДВАЛ */
     footer { padding: 72px 0 46px; border-top: 1px solid rgba(168, 198, 175, 0.09); background: linear-gradient(180deg, transparent, rgba(8, 12, 10, 0.85)); }
-    .foot-cols { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid rgba(168, 198, 175, 0.08); }
+    .foot-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid rgba(168, 198, 175, 0.08); }
     .foot-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
     .foot-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
     .foot-btn {
@@ -454,8 +435,8 @@
       transition: color .25s, transform .25s;
     }
     .foot-btn:hover { color: var(--sage-hi); transform: translateX(4px); }
-    .foot-right { text-align: right; }
-    .foot-right p { font-size: 13px; color: var(--dim); margin: 6px 0 16px; }
+    .foot-right { text-align: right; max-width: 300px; justify-self: end; }
+    .foot-right p { font-size: 13px; color: var(--dim); margin: 6px 0 16px; text-wrap: balance; }
     .foot-bot { padding-top: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; font-size: 12px; color: var(--dim); }
     .foot-bot a, .foot-bot button { background: none; border: none; font-family: var(--sans); font-size: 12px; color: var(--dim); text-decoration: none; cursor: pointer; margin-right: 18px; }
     .foot-bot a:hover, .foot-bot button:hover { color: var(--sage-hi); }
@@ -508,7 +489,7 @@
       .steps-grid { grid-template-columns: 1fr 1fr; }
       nav { display: none; }
       .foot-cols { grid-template-columns: 1fr 1fr; }
-      .foot-right { text-align: left; grid-column: 1 / -1; }
+      .foot-right { text-align: left; justify-self: start; grid-column: 1 / -1; max-width: none; }
     }
     @media (max-width: 720px) {
       .prod-grid, .q-grid, .steps-grid, .foot-cols { grid-template-columns: 1fr; }
@@ -584,7 +565,7 @@
       </div>
     </section>
 
-    <!-- ВЕЕР КАРТОЧЕК (100% НА РУССКОМ) -->
+    <!-- ВЕЕР КАРТОЧЕК -->
     <section class="showcase" id="showcase">
       <div class="container">
         <div class="fan reveal">
@@ -759,10 +740,10 @@
       </div>
     </section>
 
-    <!-- СООБЩЕСТВО -->
+    <!-- ЗАКРЫТЫЙ КАНАЛ (ВЫРОВНЕН ПОД ФОТО 4:3 БЕЗ ЛИШНИХ ПЛАШЕК) -->
     <section class="section">
       <div class="container priv-grid">
-        <div class="reveal">
+        <div class="priv-text reveal">
           <div class="eyebrow">Экосистема и комьюнити</div>
           <h2>Закрытый канал AURLEN</h2>
           <p>В нашем Telegram-канале мы делимся рабочими процессами, показываем свежие релизы дизайна, разбираем архитектуру ботов и публикуем актуальные условия для запуска проектов.</p>
@@ -774,10 +755,9 @@
         </div>
 
         <div class="photo-card reveal d2">
-  <div class="photo-in">
-    <img src="image_e5dc27.jpg" alt="AURLEN PRIVATE" loading="lazy" decoding="async" />
-  </div>
-</div>
+          <div class="photo-in">
+            <img src="image_e5dc27.jpg" alt="AURLEN PRIVATE" loading="lazy" decoding="async" />
+          </div>
         </div>
       </div>
     </section>
@@ -848,7 +828,6 @@
 
   <script>
     (() => {
-      // Плавное появление при скролле
       const io = new IntersectionObserver((entries, obs) => {
         entries.forEach(e => {
           if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
@@ -856,7 +835,6 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-      // Полоса прогресса скролла
       const bar = document.getElementById('scrollBar');
       let tick = false;
       window.addEventListener('scroll', () => {
@@ -870,7 +848,6 @@
         }
       }, { passive: true });
 
-      // Подсветка карточек под курсором
       if (window.matchMedia('(pointer: fine)').matches) {
         document.querySelectorAll('.card').forEach(c => {
           c.addEventListener('mousemove', e => {
@@ -881,7 +858,6 @@
         });
       }
 
-      // Диалог помощника в первом экране
       const replies = {
         tg: ['Интересует оформление Telegram-канала', 'Собираем цельный визуальный стиль: <strong>аватарка, адаптер, баннер и фирменные обои</strong>. Без шаблонов — под характер вашего канала.'],
         web: ['Нужен современный сайт под ключ', 'Проектируем и верстаем быстрые сайты с <strong>продуманной структурой, плавными анимациями</strong> и прямым выводом заявок в Telegram.'],
@@ -898,7 +874,6 @@
         chatLog.innerHTML = `<div class="msg user">${u}</div><div class="msg bot">${bot}</div>`;
       });
 
-      // Данные для выдвижной плашки
       const drData = {
         site: {
           badge: 'Разово · Разработка',
@@ -1049,7 +1024,6 @@
       backdrop.addEventListener('click', closeDr);
       window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDr(); });
 
-      // Пошаговый конфигуратор
       const st = { step: 1, type: 'Telegram-канал / Блог', srv: ['Аватарка, баннер и обои ТГК'], pace: 'Стандартный запуск' };
       const steps = {
         1: { lbl: 'Шаг 1 из 3 · Направление проекта', q: 'Что будем упаковывать или запускать?', h: 'Выберите основной формат вашего проекта', m: false, k: 'type', opts: [
