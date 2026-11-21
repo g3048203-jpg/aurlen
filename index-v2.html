@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="ru" data-theme="graphite" data-font="onest-plex">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0d0e10" />
+  <meta name="theme-color" content="#0b0c0e" />
   <title>AURLEN COMMUNITY</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,60 +11,72 @@
     :root {
       --font-heading: 'Onest', sans-serif;
       --font-body: 'IBM Plex Sans', sans-serif;
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --transition-theme: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+      --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+      --transition-theme: background-color 0.5s var(--ease-luxury), color 0.5s var(--ease-luxury), border-color 0.5s var(--ease-luxury);
     }
 
+    /* 1. Графит — Слайд 12/18 (тёплый камень + глубокий графит) */
     [data-theme="graphite"] {
-      --bg-primary: #0d0e10;
-      --bg-secondary: #15171a;
-      --bg-card: rgba(255, 255, 255, 0.03);
-      --bg-card-hover: rgba(255, 255, 255, 0.06);
-      --text-primary: #f2f1ed;
-      --text-secondary: #9d9c98;
-      --text-muted: #666562;
-      --accent: #d8d4ca;
-      --accent-contrast: #0d0e10;
-      --border: rgba(216, 212, 202, 0.14);
-      --border-strong: rgba(216, 212, 202, 0.32);
-      --glow: rgba(216, 212, 202, 0.08);
+      --bg-primary: #0b0c0d;
+      --bg-secondary: #131416;
+      --bg-card: rgba(255, 253, 248, 0.025);
+      --bg-card-hover: rgba(255, 253, 248, 0.055);
+      --text-primary: #f4f2ed;
+      --text-secondary: #a19f99;
+      --text-muted: #64635e;
+      --accent: #dcd7cc;
+      --accent-secondary: #8c887e;
+      --accent-contrast: #0b0c0d;
+      --border: rgba(220, 215, 204, 0.12);
+      --border-strong: rgba(220, 215, 204, 0.28);
+      --spotlight: rgba(220, 215, 204, 0.14);
+      --glow-1: rgba(220, 215, 204, 0.09);
+      --glow-2: rgba(140, 136, 126, 0.07);
     }
 
+    /* 2. Обсидиан — Слайд 03/06 (холодное серебро + ночной обсидиан) */
     [data-theme="obsidian"] {
-      --bg-primary: #09080c;
-      --bg-secondary: #121018;
-      --bg-card: rgba(214, 210, 224, 0.03);
-      --bg-card-hover: rgba(214, 210, 224, 0.07);
-      --text-primary: #f5f4f8;
-      --text-secondary: #a5a1b0;
-      --text-muted: #696475;
-      --accent: #e0dce8;
-      --accent-contrast: #09080c;
-      --border: rgba(224, 220, 232, 0.14);
-      --border-strong: rgba(224, 220, 232, 0.34);
-      --glow: rgba(188, 178, 214, 0.1);
+      --bg-primary: #08070b;
+      --bg-secondary: #100e16;
+      --bg-card: rgba(226, 222, 240, 0.028);
+      --bg-card-hover: rgba(226, 222, 240, 0.06);
+      --text-primary: #f6f5fa;
+      --text-secondary: #a49fb3;
+      --text-muted: #656073;
+      --accent: #e4e0ee;
+      --accent-secondary: #988eb3;
+      --accent-contrast: #08070b;
+      --border: rgba(228, 224, 238, 0.12);
+      --border-strong: rgba(228, 224, 238, 0.3);
+      --spotlight: rgba(212, 204, 238, 0.16);
+      --glow-1: rgba(186, 174, 224, 0.11);
+      --glow-2: rgba(120, 108, 160, 0.08);
     }
 
+    /* 3. Шалфей — Слайд 11/18 (матовый шалфей + глубокий лесной тёмный) */
     [data-theme="sage"] {
-      --bg-primary: #0c100e;
-      --bg-secondary: #131916;
-      --bg-card: rgba(163, 184, 172, 0.035);
-      --bg-card-hover: rgba(163, 184, 172, 0.075);
-      --text-primary: #eef2ef;
-      --text-secondary: #98a89f;
-      --text-muted: #5f6e66;
-      --accent: #a6b9ae;
-      --accent-contrast: #0c100e;
-      --border: rgba(166, 185, 174, 0.15);
-      --border-strong: rgba(166, 185, 174, 0.35);
-      --glow: rgba(166, 185, 174, 0.09);
+      --bg-primary: #0a0e0c;
+      --bg-secondary: #111714;
+      --bg-card: rgba(168, 192, 179, 0.03);
+      --bg-card-hover: rgba(168, 192, 179, 0.065);
+      --text-primary: #eff4f1;
+      --text-secondary: #97a89f;
+      --text-muted: #5b6b63;
+      --accent: #adc2b6;
+      --accent-secondary: #6d8276;
+      --accent-contrast: #0a0e0c;
+      --border: rgba(173, 194, 182, 0.13);
+      --border-strong: rgba(173, 194, 182, 0.32);
+      --spotlight: rgba(173, 194, 182, 0.15);
+      --glow-1: rgba(173, 194, 182, 0.1);
+      --glow-2: rgba(109, 130, 118, 0.08);
     }
 
     [data-font="onest-plex"] {
       --font-heading: 'Onest', sans-serif;
       --font-body: 'IBM Plex Sans', sans-serif;
       --heading-weight: 700;
-      --heading-tracking: -0.02em;
+      --heading-tracking: -0.025em;
     }
 
     [data-font="cormorant-inter"] {
@@ -98,21 +109,68 @@
       color: var(--text-primary);
       font-family: var(--font-body);
       font-size: 16px;
-      line-height: 1.6;
+      line-height: 1.65;
       overflow-x: hidden;
       transition: var(--transition-theme);
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Прогресс-бар скролла сверху */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-secondary), var(--accent));
+      z-index: 999;
+      transition: width 0.08s linear;
+    }
+
+    /* Премиальный живой фон с плавным движением света */
     .ambient-bg {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      background:
-        radial-gradient(circle at 50% 0%, var(--glow) 0%, transparent 55%),
-        radial-gradient(circle at 85% 45%, var(--glow) 0%, transparent 45%);
-      transition: background 0.5s ease;
+      overflow: hidden;
+    }
+
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.9;
+      transition: background 0.6s ease;
+    }
+
+    .orb-1 {
+      width: 580px;
+      height: 580px;
+      top: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, var(--glow-1) 0%, transparent 70%);
+      animation: orbDrift1 14s ease-in-out infinite alternate;
+    }
+
+    .orb-2 {
+      width: 460px;
+      height: 460px;
+      top: 42%;
+      right: -120px;
+      background: radial-gradient(circle, var(--glow-2) 0%, transparent 70%);
+      animation: orbDrift2 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbDrift1 {
+      0% { transform: translate(-54%, 0px) scale(1); }
+      100% { transform: translate(-46%, 35px) scale(1.08); }
+    }
+
+    @keyframes orbDrift2 {
+      0% { transform: translate(0px, -20px) scale(1); }
+      100% { transform: translate(-40px, 30px) scale(1.12); }
     }
 
     .container {
@@ -128,16 +186,81 @@
       font-family: var(--font-heading);
       font-weight: var(--heading-weight);
       letter-spacing: var(--heading-tracking);
-      line-height: 1.15;
+      line-height: 1.12;
     }
 
+    /* Шапка сайта с названием AURLEN COMMUNITY */
+    .site-header {
+      position: relative;
+      z-index: 10;
+      padding: 26px 0 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .brand-main {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.34em;
+      color: var(--accent);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .header-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulseDot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.82); }
+    }
+
+    /* Панель выбора темы и шрифта */
     .customizer-bar {
       position: sticky;
       top: 12px;
       z-index: 100;
       max-width: 1140px;
-      margin: 12px auto 0;
-      padding: 0 16px;
+      margin: 16px auto 0;
+      padding: 0 24px;
     }
 
     .customizer-inner {
@@ -147,12 +270,12 @@
       justify-content: space-between;
       gap: 10px 16px;
       padding: 10px 16px;
-      background: rgba(15, 16, 19, 0.82);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(14, 15, 18, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--border-strong);
       border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
     }
 
     .customizer-group {
@@ -163,9 +286,9 @@
     }
 
     .customizer-label {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--text-secondary);
       margin-right: 4px;
       font-weight: 500;
@@ -174,7 +297,7 @@
     .chip-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       padding: 6px 12px;
       border-radius: 8px;
       border: 1px solid var(--border);
@@ -183,13 +306,14 @@
       font-family: var(--font-body);
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.3s var(--ease-luxury);
       white-space: nowrap;
     }
 
     .chip-btn:hover {
       color: var(--text-primary);
       border-color: var(--border-strong);
+      transform: translateY(-1px);
     }
 
     .chip-btn.active {
@@ -207,122 +331,165 @@
       flex-shrink: 0;
     }
 
-    @keyframes heroFadeUp {
-      from {
+    /* Дорогие анимации появления при загрузке и скролле */
+    @keyframes heroReveal {
+      0% {
         opacity: 0;
-        transform: translateY(22px);
+        transform: translateY(28px) scale(0.985);
+        filter: blur(6px);
       }
-      to {
+      100% {
         opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes subtleFloat {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-6px);
+        transform: translateY(0) scale(1);
+        filter: blur(0);
       }
     }
 
     .hero-animate {
       opacity: 0;
-      animation: heroFadeUp 0.85s var(--ease-out-expo) forwards;
+      animation: heroReveal 1s var(--ease-luxury) forwards;
     }
 
     .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.22s; }
+    .delay-2 { animation-delay: 0.24s; }
+    .delay-3 { animation-delay: 0.38s; }
+    .delay-4 { animation-delay: 0.52s; }
 
+    /* Плавное проявление при скролле вниз */
     .reveal {
       opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.75s var(--ease-out-expo), transform 0.75s var(--ease-out-expo);
-      will-change: opacity, transform;
+      transform: translateY(34px) scale(0.985);
+      filter: blur(4px);
+      transition:
+        opacity 0.9s var(--ease-luxury),
+        transform 0.9s var(--ease-luxury),
+        filter 0.9s var(--ease-luxury);
+      will-change: opacity, transform, filter;
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .hero-animate, .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        animation: none !important;
-        transition: none !important;
-      }
-    }
+    .stagger-1 { transition-delay: 0.06s; }
+    .stagger-2 { transition-delay: 0.14s; }
+    .stagger-3 { transition-delay: 0.22s; }
+    .stagger-4 { transition-delay: 0.30s; }
+    .stagger-5 { transition-delay: 0.38s; }
+    .stagger-6 { transition-delay: 0.46s; }
 
+    /* Первый экран (Hero) */
     .hero {
-      padding: 84px 0 72px;
+      padding: 76px 0 68px;
       text-align: center;
       border-bottom: 1px solid var(--border);
     }
 
     .hero-badge {
       display: inline-block;
-      padding: 6px 14px;
+      padding: 6px 16px;
       border-radius: 999px;
       border: 1px solid var(--border-strong);
       background: var(--bg-card);
       color: var(--accent);
-      font-size: 12px;
-      letter-spacing: 0.14em;
+      font-size: 11px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 26px;
     }
 
     .hero-title {
-      font-size: clamp(2.5rem, 6.5vw, 4.75rem);
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 22px;
-      color: var(--text-primary);
+      letter-spacing: 0.06em;
+      margin-bottom: 24px;
+      background: linear-gradient(180deg, var(--text-primary) 25%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero-title span {
       display: block;
-      font-size: clamp(1.1rem, 2.5vw, 1.65rem);
-      letter-spacing: 0.28em;
-      color: var(--accent);
-      margin-top: 8px;
+      font-size: clamp(1.05rem, 2.4vw, 1.55rem);
+      letter-spacing: 0.36em;
+      margin-top: 10px;
       font-weight: 500;
+      -webkit-text-fill-color: var(--accent);
     }
 
     .hero-subtitle {
       max-width: 680px;
-      margin: 0 auto;
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      margin: 0 auto 44px;
+      font-size: clamp(1rem, 1.7vw, 1.14rem);
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
+    /* Плашка доверия и стандартов работы */
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .trust-item {
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: border-color 0.35s ease, transform 0.35s var(--ease-luxury);
+    }
+
+    .trust-item:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .trust-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Секции */
     .section {
-      padding: 76px 0;
+      padding: 84px 0;
       border-bottom: 1px solid var(--border);
     }
 
     .tgk-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
+      gap: 52px;
       align-items: center;
     }
 
     .section-kicker {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.18em;
       color: var(--accent);
       margin-bottom: 12px;
       display: block;
     }
 
     .section-title {
-      font-size: clamp(1.75rem, 3.6vw, 2.6rem);
+      font-size: clamp(1.85rem, 3.8vw, 2.75rem);
       margin-bottom: 18px;
     }
 
@@ -333,14 +500,16 @@
     }
 
     .tgk-link-card {
-      margin-top: 24px;
-      padding: 18px 20px;
-      border-radius: 14px;
+      margin-top: 26px;
+      padding: 20px 22px;
+      border-radius: 16px;
       background: var(--bg-card);
       border: 1px solid var(--border-strong);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
     }
 
     .tgk-link-desc {
@@ -349,27 +518,45 @@
     }
 
     .btn-primary {
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       align-self: flex-start;
-      padding: 12px 22px;
+      padding: 13px 24px;
       border-radius: 10px;
       background: var(--accent);
       color: var(--accent-contrast);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      transition: transform 0.35s var(--ease-luxury), box-shadow 0.35s var(--ease-luxury);
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.65s var(--ease-luxury);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-      opacity: 0.94;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
     }
 
+    .btn-primary:hover::after {
+      left: 140%;
+    }
+
+    /* Контейнер фото без рамки и без надписей */
     .tgk-media {
       width: 100%;
       max-width: 420px;
@@ -380,11 +567,16 @@
       position: relative;
       width: 100%;
       aspect-ratio: 1 / 1;
-      border-radius: 20px;
+      border-radius: 22px;
       overflow: hidden;
       background: #000000;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
-      animation: subtleFloat 7s ease-in-out infinite;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      transition: transform 0.5s var(--ease-luxury), box-shadow 0.5s var(--ease-luxury);
+    }
+
+    .tgk-image-frame:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 32px 70px rgba(0, 0, 0, 0.75);
     }
 
     .tgk-image-frame img {
@@ -395,8 +587,9 @@
       object-position: center;
     }
 
+    /* Карточки продуктов с премиальным Spotlight-свечением при наведении */
     .section-header {
-      margin-bottom: 40px;
+      margin-bottom: 42px;
     }
 
     .products-grid {
@@ -405,22 +598,72 @@
       gap: 20px;
     }
 
-    .card {
+    .spotlight-card {
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+      position: relative;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 28px;
-      transition: transform 0.3s var(--ease-out-expo), border-color 0.3s ease, background-color 0.3s ease;
+      padding: 30px;
+      overflow: hidden;
+      transition:
+        transform 0.45s var(--ease-luxury),
+        border-color 0.45s var(--ease-luxury),
+        background-color 0.45s var(--ease-luxury),
+        box-shadow 0.45s var(--ease-luxury);
     }
 
-    .card:hover {
-      transform: translateY(-4px);
+    /* Мягкий блик, следующий за курсором */
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        420px circle at var(--mouse-x) var(--mouse-y),
+        var(--spotlight),
+        transparent 65%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Тонкая верхняя световая грань при наведении */
+    .spotlight-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.45s ease, left 0.45s var(--ease-luxury), right 0.45s var(--ease-luxury);
+      pointer-events: none;
+    }
+
+    .spotlight-card:hover {
+      transform: translateY(-6px);
       border-color: var(--border-strong);
       background: var(--bg-card-hover);
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.42);
+    }
+
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    .spotlight-card:hover::after {
+      opacity: 0.75;
+      left: 5%;
+      right: 5%;
     }
 
     .card-title {
-      font-size: 1.35rem;
+      position: relative;
+      z-index: 1;
+      font-size: 1.38rem;
       margin-bottom: 18px;
       color: var(--text-primary);
       display: flex;
@@ -433,15 +676,23 @@
       font-family: var(--font-body);
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       padding: 4px 10px;
       border-radius: 6px;
       border: 1px solid var(--border-strong);
       color: var(--accent);
       font-weight: 500;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    .spotlight-card:hover .card-tag {
+      background: var(--accent);
+      color: var(--accent-contrast);
     }
 
     .service-list {
+      position: relative;
+      z-index: 1;
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -453,17 +704,27 @@
       padding-left: 18px;
       color: var(--text-secondary);
       font-size: 0.98rem;
+      transition: color 0.3s ease, transform 0.3s var(--ease-luxury);
+    }
+
+    .spotlight-card:hover .service-list li {
+      color: var(--text-primary);
     }
 
     .service-list li::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 0.62em;
-      width: 6px;
-      height: 6px;
+      top: 0.65em;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    .spotlight-card:hover .service-list li::before {
+      transform: scale(1.35);
     }
 
     .service-list strong {
@@ -481,10 +742,13 @@
     }
 
     .slot-hint {
+      position: relative;
+      z-index: 1;
       color: var(--text-muted);
       font-size: 0.92rem;
     }
 
+    /* Секция Кейсы и Портфолио */
     .cases-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -493,30 +757,31 @@
     }
 
     .case-placeholder {
-      padding: 24px;
-      border-radius: 16px;
-      border: 1px dashed var(--border-strong);
-      background: var(--bg-card);
-      min-height: 150px;
+      min-height: 160px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      border-style: dashed;
     }
 
     .case-num {
-      font-size: 12px;
-      letter-spacing: 0.12em;
+      position: relative;
+      z-index: 1;
+      font-size: 11px;
+      letter-spacing: 0.16em;
       color: var(--accent);
       text-transform: uppercase;
     }
 
     .case-label {
-      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+      color: var(--text-secondary);
       font-size: 0.95rem;
     }
 
     .portfolio-box {
-      padding: 32px;
+      padding: 34px;
       border-radius: 20px;
       background: var(--bg-secondary);
       border: 1px solid var(--border-strong);
@@ -527,8 +792,13 @@
       gap: 20px;
     }
 
+    .portfolio-info {
+      position: relative;
+      z-index: 1;
+    }
+
     .portfolio-info h3 {
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       margin-bottom: 6px;
     }
 
@@ -538,55 +808,56 @@
     }
 
     .btn-outline {
+      position: relative;
+      z-index: 1;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 22px;
+      padding: 13px 24px;
       border-radius: 10px;
       border: 1px solid var(--border-strong);
       color: var(--text-primary);
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
-      transition: background-color 0.25s ease, color 0.25s ease;
+      transition: all 0.35s var(--ease-luxury);
     }
 
     .btn-outline:hover {
       background: var(--accent);
       color: var(--accent-contrast);
       border-color: var(--accent);
+      transform: translateY(-2px);
     }
 
     .footer {
-      padding: 32px 0 44px;
+      padding: 36px 0 48px;
       text-align: center;
       color: var(--text-muted);
       font-size: 0.88rem;
+      letter-spacing: 0.06em;
     }
 
     @media (max-width: 900px) {
       .tgk-grid {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 36px;
       }
 
       .tgk-media {
         max-width: 340px;
       }
 
+      .trust-strip,
       .cases-grid {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 640px) {
-      .container {
-        padding: 0 18px;
-      }
-
+      .container,
       .customizer-bar {
-        top: 8px;
-        padding: 0 10px;
+        padding: 0 16px;
       }
 
       .customizer-inner {
@@ -599,12 +870,16 @@
         font-size: 12px;
       }
 
+      .header-status {
+        display: none;
+      }
+
       .hero {
-        padding: 56px 0 52px;
+        padding: 54px 0 52px;
       }
 
       .section {
-        padding: 54px 0;
+        padding: 56px 0;
       }
 
       .products-grid {
@@ -612,8 +887,8 @@
         gap: 16px;
       }
 
-      .card {
-        padding: 22px 20px;
+      .spotlight-card {
+        padding: 24px 20px;
       }
 
       .btn-primary, .btn-outline {
@@ -628,20 +903,40 @@
   </style>
 </head>
 <body>
-  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+  </div>
+
+  <!-- Шапка AURLEN COMMUNITY -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-lockup">
+        <span class="brand-main">AURLEN</span>
+        <span class="brand-sub">COMMUNITY</span>
+      </a>
+      <div class="header-status">
+        <span class="status-dot"></span>
+        <span>Принимаем проекты в работу</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Панель выбора цветовой гаммы и шрифтовой пары -->
   <div class="customizer-bar" role="region" aria-label="Настройка оформления">
     <div class="customizer-inner">
       <div class="customizer-group">
         <span class="customizer-label">Цвет:</span>
         <button type="button" class="chip-btn active" data-set-theme="graphite">
-          <span class="swatch" style="background:#d8d4ca;"></span>1. Графит
+          <span class="swatch" style="background:#dcd7cc;"></span>1. Графит
         </button>
         <button type="button" class="chip-btn" data-set-theme="obsidian">
-          <span class="swatch" style="background:#e0dce8;"></span>2. Обсидиан
+          <span class="swatch" style="background:#e4e0ee;"></span>2. Обсидиан
         </button>
         <button type="button" class="chip-btn" data-set-theme="sage">
-          <span class="swatch" style="background:#a6b9ae;"></span>3. Шалфей
+          <span class="swatch" style="background:#adc2b6;"></span>3. Шалфей
         </button>
       </div>
 
@@ -655,6 +950,7 @@
   </div>
 
   <main>
+    <!-- ПЕРВЫЙ ЭКРАН -->
     <section class="hero">
       <div class="container">
         <span class="hero-badge hero-animate">Digital &amp; Visual Studio</span>
@@ -665,9 +961,26 @@
         <p class="hero-subtitle hero-animate delay-2">
           Создаём цельную цифровую упаковку для экспертов, брендов и локальных заведений: разрабатываем современные сайты, функциональных Telegram-ботов и выразительное визуальное оформление каналов под ключ.
         </p>
+
+        <!-- Блок доверия -->
+        <div class="trust-strip hero-animate delay-3">
+          <div class="trust-item">
+            <div class="trust-title">Единый визуальный код</div>
+            <div class="trust-desc">Собираем дизайн канала, бота и сайта в одной эстетике без разрозненных шаблонов.</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-title">Прозрачные этапы работы</div>
+            <div class="trust-desc">Фиксируем задачу, показываем промежуточные версии и доводим результат до идеала.</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-title">Комплексный запуск</div>
+            <div class="trust-desc">Команда профильных специалистов закрывает дизайн и разработку в одном окне.</div>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- БЛОК ТГК + ФОТО СПРАВА -->
     <section class="section" id="community">
       <div class="container">
         <div class="tgk-grid">
@@ -693,7 +1006,7 @@
             </div>
           </div>
 
-          <div class="tgk-media reveal">
+          <div class="tgk-media reveal stagger-2">
             <div class="tgk-image-frame">
               <img src="image_e5dc27.jpg" alt="" loading="eager" />
             </div>
@@ -702,6 +1015,7 @@
       </div>
     </section>
 
+    <!-- НАШИ ПРОДУКТЫ -->
     <section class="section" id="products">
       <div class="container">
         <div class="section-header reveal">
@@ -710,7 +1024,7 @@
         </div>
 
         <div class="products-grid">
-          <article class="card reveal">
+          <article class="spotlight-card reveal stagger-1">
             <h3 class="card-title">
               Отдельные заказы
               <span class="card-tag">Single</span>
@@ -724,7 +1038,7 @@
             </ul>
           </article>
 
-          <article class="card reveal">
+          <article class="spotlight-card reveal stagger-2">
             <h3 class="card-title">
               Комплекты работ
               <span class="card-tag">Packs</span>
@@ -736,7 +1050,7 @@
             </ul>
           </article>
 
-          <article class="card reveal">
+          <article class="spotlight-card reveal stagger-3">
             <h3 class="card-title">
               Сформируй свой комплект
               <span class="card-tag">Custom</span>
@@ -748,7 +1062,7 @@
             </ul>
           </article>
 
-          <article class="card reveal">
+          <article class="spotlight-card reveal stagger-4">
             <h3 class="card-title">
               Комплексный запуск
               <span class="card-tag">Synergy</span>
@@ -761,7 +1075,7 @@
             </ul>
           </article>
 
-          <article class="card card-slot reveal">
+          <article class="spotlight-card card-slot reveal stagger-5">
             <h3 class="card-title">
               Разработка сайтов и Telegram-ботов
               <span class="card-tag">Скоро</span>
@@ -769,7 +1083,7 @@
             <p class="slot-hint">Место зарезервировано под подробное описание web-разработки и автоматизации.</p>
           </article>
 
-          <article class="card card-slot reveal">
+          <article class="spotlight-card card-slot reveal stagger-6">
             <h3 class="card-title">
               Дополнительный продукт
               <span class="card-tag">Слот</span>
@@ -780,6 +1094,7 @@
       </div>
     </section>
 
+    <!-- КЕЙСЫ И ПОРТФОЛИО -->
     <section class="section" id="portfolio">
       <div class="container">
         <div class="section-header reveal">
@@ -788,21 +1103,21 @@
         </div>
 
         <div class="cases-grid">
-          <div class="case-placeholder reveal">
+          <div class="spotlight-card case-placeholder reveal stagger-1">
             <span class="case-num">Кейс 01</span>
             <p class="case-label">Место под разбор проекта: упаковка Telegram-канала</p>
           </div>
-          <div class="case-placeholder reveal">
+          <div class="spotlight-card case-placeholder reveal stagger-2">
             <span class="case-num">Кейс 02</span>
             <p class="case-label">Место под разбор проекта: разработка сайта</p>
           </div>
-          <div class="case-placeholder reveal">
+          <div class="spotlight-card case-placeholder reveal stagger-3">
             <span class="case-num">Кейс 03</span>
             <p class="case-label">Место под разбор проекта: внедрение Telegram-бота</p>
           </div>
         </div>
 
-        <div class="portfolio-box reveal">
+        <div class="spotlight-card portfolio-box reveal">
           <div class="portfolio-info">
             <h3>Портфолио</h3>
             <p>Подборка выполненных работ по оформлению каналов, ботам и сайтам.</p>
@@ -826,7 +1141,9 @@
       const root = document.documentElement;
       const themeButtons = document.querySelectorAll('[data-set-theme]');
       const fontButtons = document.querySelectorAll('[data-set-font]');
+      const progressBar = document.getElementById('scrollProgress');
 
+      // Переключение палитры
       themeButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
           const theme = btn.getAttribute('data-set-theme');
@@ -836,6 +1153,7 @@
         });
       });
 
+      // Переключение шрифтов
       fontButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
           const font = btn.getAttribute('data-set-font');
@@ -845,6 +1163,28 @@
         });
       });
 
+      // Интерактивный Spotlight-блик на всех плашках при наведении мыши
+      const spotlightCards = document.querySelectorAll('.spotlight-card');
+      spotlightCards.forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', x + 'px');
+          card.style.setProperty('--mouse-y', y + 'px');
+        });
+      });
+
+      // Полоса прогресса прокрутки
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (docHeight > 0 && progressBar) {
+          progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+        }
+      }, { passive: true });
+
+      // Плавная анимация появления блоков при скролле вниз
       const revealEls = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
@@ -856,7 +1196,7 @@
               }
             });
           },
-          { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
         );
         revealEls.forEach((el) => observer.observe(el));
       } else {
