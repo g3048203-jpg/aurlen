@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth" data-theme="hostile">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MLT TEAM — Cyber-Brutalist Ecosystem</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Syne"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-main: #030305;
+      --accent-1: #ff1a3c;
+      --accent-2: #bd00ff;
+      --text-soft: #df8eff;
+      --card-bg-1: rgba(35, 35, 48, 0.85);
+      --card-bg-2: rgba(16, 16, 24, 0.95);
+      --border-color: rgba(255, 255, 255, 0.18);
+      --glow-color: rgba(189, 0, 255, 0.4);
+    }
+
+    [data-theme="hostile"] {
+      --bg-main: #050102;
+      --accent-1: #ff0033;
+      --accent-2: #660011;
+      --text-soft: #ff6688;
+      --card-bg-1: rgba(26, 6, 10, 0.90);
+      --card-bg-2: rgba(10, 2, 4, 0.98);
+      --border-color: rgba(255, 0, 51, 0.35);
+      --glow-color: rgba(255, 0, 51, 0.45);
+    }
+
+    [data-theme="void"] {
+      --bg-main: #010103;
+      --accent-1: #ffffff;
+      --accent-2: #555577;
+      --text-soft: #aaaaaa;
+      --card-bg-1: rgba(20, 20, 28, 0.85);
+      --card-bg-2: rgba(8, 8, 12, 0.95);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --glow-color: rgba(255, 255, 255, 0.2);
+    }
+
+    [data-theme="pill"] {
+      --bg-main: #030305;
+      --accent-1: #ff1a3c;
+      --accent-2: #bd00ff;
+      --text-soft: #df8eff;
+      --card-bg-1: rgba(35, 35, 48, 0.85);
+      --card-bg-2: rgba(16, 16, 24, 0.95);
+      --border-color: rgba(255, 255, 255, 0.18);
+      --glow-color: rgba(189, 0, 255, 0.4);
+    }
+
+    [data-theme="matrix"] {
+      --bg-main: #020803;
+      --accent-1: #00ff66;
+      --accent-2: #00cc44;
+      --text-soft: #00ff88;
+      --card-bg-1: rgba(10, 35, 18, 0.85);
+      --card-bg-2: rgba(4, 15, 8, 0.95);
+      --border-color: rgba(0, 255, 102, 0.25);
+      --glow-color: rgba(0, 255, 102, 0.4);
+    }
+
+    [data-theme="blue"] {
+      --bg-main: #02050a;
+      --accent-1: #00d2ff;
+      --accent-2: #0055ff;
+      --text-soft: #70d6ff;
+      --card-bg-1: rgba(15, 28, 48, 0.85);
+      --card-bg-2: rgba(6, 12, 24, 0.95);
+      --border-color: rgba(0, 210, 255, 0.25);
+      --glow-color: rgba(0, 210, 255, 0.4);
+    }
+
+    [data-theme="amber"] {
+      --bg-main: #080502;
+      --accent-1: #ffb700;
+      --accent-2: #ff7700;
+      --text-soft: #ffcc44;
+      --card-bg-1: rgba(40, 28, 10, 0.85);
+      --card-bg-2: rgba(18, 12, 4, 0.95);
+      --border-color: rgba(255, 183, 0, 0.25);
+      --glow-color: rgba(255, 183, 0, 0.4);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: #f3f4f6;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.5s ease;
+    }
+
+    .rich-bg {
+      background: 
+        radial-gradient(circle at 10% 20%, var(--accent-1) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, var(--accent-2) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, var(--bg-main) 0%, var(--bg-main) 100%);
+      background-attachment: fixed;
+      opacity: 0.25;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -10;
+    }
+
+    .cyber-glitch {
+      position: relative;
+      display: inline-block;
+    }
+    .cyber-glitch:hover {
+      animation: glitchAnim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    }
+    @keyframes glitchAnim {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); filter: drop-shadow(2px -2px var(--accent-1)); }
+      40% { transform: translate(-2px, -2px); filter: drop-shadow(-2px 2px var(--accent-2)); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    .cyber-matrix-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -5;
+      overflow: hidden;
+      opacity: 0.08;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-soft);
+      line-height: 1.5;
+      display: flex;
+      justify-content: space-between;
+      white-space: nowrap;
+    }
+
+    .matrix-column {
+      animation: matrixFall linear infinite;
+    }
+    .matrix-column:nth-child(1) { animation-duration: 14s; animation-delay: -2s; }
+    .matrix-column:nth-child(2) { animation-duration: 21s; animation-delay: -6s; }
+    .matrix-column:nth-child(3) { animation-duration: 16s; animation-delay: -4s; }
+    .matrix-column:nth-child(4) { animation-duration: 24s; animation-delay: -9s; }
+    .matrix-column:nth-child(5) { animation-duration: 18s; animation-delay: -1s; }
+
+    @keyframes matrixFall {
+      0% { transform: translateY(-120%); }
+      100% { transform: translateY(120%); }
+    }
+
+    .soft-accent-text {
+      color: var(--text-soft);
+      text-shadow: 0 0 25px var(--glow-color);
+    }
+
+    #intro-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-main);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1rem;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .intro-char {
+      opacity: 0;
+      filter: blur(14px);
+      transform: translateY(20px) scale(0.92);
+      display: inline-block;
+      background: linear-gradient(135deg, #ffffff 20%, var(--text-soft) 60%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: charAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes charAppear {
+      to {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    #lab-modal {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #lab-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    #lab-modal-content {
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #lab-modal.open #lab-modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .scrolling-pill {
+      position: fixed;
+      right: 12px;
+      top: 50%;
+      width: 12px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--text-soft) 0%, var(--accent-2) 100%);
+      border-radius: 20px;
+      box-shadow: 0 0 20px var(--glow-color);
+      z-index: 50;
+      pointer-events: none;
+      transition: transform 0.1s linear;
+      display: none;
+    }
+    @media(min-width: 1024px) {
+      .scrolling-pill { display: block; right: 20px; width: 16px; height: 52px; }
+    }
+
+    .cyber-card {
+      background: linear-gradient(135deg, var(--card-bg-1) 0%, var(--card-bg-2) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9);
+      position: relative;
+      will-change: transform;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .hero-glow-frame {
+      box-shadow: 
+        inset 0 1px 4px 0 rgba(255, 255, 255, 0.25),
+        0 25px 50px -15px rgba(0, 0, 0, 0.95),
+        0 0 40px -5px var(--glow-color);
+      border-color: var(--accent-1);
+    }
+
+    @media (hover: hover) {
+      .cyber-card:hover {
+        border-color: var(--accent-1);
+        box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.98), 0 0 40px -5px var(--glow-color);
+      }
+      .cyber-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--glow-color), transparent 60%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: inherit;
+      }
+      .cyber-card:hover::before {
+        opacity: 1;
+      }
+    }
+
+    .btn-cyber {
+      background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 25px var(--glow-color);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      display: inline-block;
+      will-change: transform;
+    }
+    .btn-cyber:active {
+      transform: scale(0.96);
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(50px) scale(0.96);
+      filter: blur(8px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+    .reveal-on-scroll.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+
+    #mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .theme-dropdown {
+      position: relative;
+    }
+    .theme-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      background: rgba(10, 2, 4, 0.98);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 8px;
+      width: 180px;
+      display: none;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+      z-index: 100;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .theme-menu.active {
+      display: block;
+    }
+    .theme-option {
+      width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #d1d5db;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .theme-option:hover {
+      background: var(--glow-color);
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="antialiased font-sans text-sm sm:text-base">
+
+  <div class="rich-bg"></div>
+
+  <!-- МОДАЛЬНОЕ ОКНО ДЛЯ БЕСПЛАТНЫХ КИБЕР-КАПСУЛ -->
+  <div id="lab-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md">
+    <div id="lab-modal-content" class="cyber-card w-full max-w-xl p-5 sm:p-8 relative border shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="playClick(); closeModal();" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2 cursor-pointer z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      
+      <div class="flex items-center gap-3 mb-5">
+        <div id="modal-icon" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/10 flex items-center justify-center text-xl sm:text-2xl">💊</div>
+        <div>
+          <span id="modal-tag" class="font-mono text-[10px] sm:text-xs uppercase tracking-widest soft-accent-text">[ PROTOCOL // HOSTILE ]</span>
+          <h3 id="modal-title" class="font-display text-xl sm:text-2xl font-bold text-white mt-0.5">Название капсулы</h3>
+        </div>
+      </div>
+
+      <!-- ВИДЕО-БЛОК -->
+      <div class="w-full aspect-video rounded-2xl overflow-hidden mb-5 border border-white/10 bg-black/80 relative flex items-center justify-center">
+        <video id="modal-video" autoplay loop muted playsinline class="w-full h-full object-cover" onerror="handleVideoError()">
+          <source src="" type="video/mp4" id="video-source">
+        </video>
+        <div id="video-fallback" class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 font-mono text-xs hidden bg-[#050102]">
+          <span class="text-2xl mb-2 soft-accent-text">💊</span>
+          <span>[ Положите видео в папку сайта ]</span>
+        </div>
+      </div>
+
+      <p id="modal-desc" class="text-gray-300 text-xs sm:text-sm leading-relaxed mb-6 italic">
+        Описание выбранного протокола лаборатории...
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/10">
+        <span class="font-mono text-[10px] text-gray-500">// FREE ACCESS</span>
+        <a id="modal-link" href="#" target="_blank" onclick="playClick()" class="w-full sm:w-auto px-6 py-3 rounded-xl btn-cyber magnetic text-white font-bold text-xs sm:text-sm text-center">
+          Перейти в Telegram-канал ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЦИФРОВЫЕ ШУМЫ -->
+  <div class="cyber-matrix-bg">
+    <div class="matrix-column">010199 // HOSTILE<br/>ENC_AES_256<br/>NODE_LOCKED</div>
+    <div class="matrix-column">SYSTEM_WARN: RED<br/>CRYPTO_HASH</div>
+    <div class="matrix-column hidden sm:block">DANGER_ZONE<br/>ACCESS_DENIED</div>
+    <div class="matrix-column hidden md:block">SECURE_LINK<br/>TCP_HANDSHAKE</div>
+    <div class="matrix-column hidden lg:block">PROTOCOL_BLOOD</div>
+  </div>
+
+  <div class="scrolling-pill" id="scrollPill"></div>
+
+  <!-- ИНТРО -->
+  <div id="intro-screen">
+    <div class="text-center px-4 max-w-full">
+      <h1 id="intro-text" class="font-display text-4xl sm:text-7xl font-black tracking-wider mb-8 leading-tight"></h1>
+      <div>
+        <button onclick="playClick(); skipIntro();" class="magnetic px-7 py-3 rounded-full border border-white/20 bg-black/60 backdrop-blur-md text-[11px] font-mono uppercase tracking-widest text-gray-200 hover:text-white transition shadow-2xl cursor-pointer">
+          [ ПРОПУСТИТЬ ]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ШАПКА -->
+  <header class="sticky top-2 sm:top-4 z-40 max-w-6xl mx-auto px-3 sm:px-4 reveal-on-scroll">
+    <div class="cyber-card px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between backdrop-blur-xl" style="overflow: visible !important;">
+      <a href="#" onclick="playClick()" class="font-display font-black text-xl tracking-tight text-white cyber-glitch">MLT</a>
+      
+      <nav class="hidden md:flex items-center space-x-1 text-sm font-semibold">
+        <a href="#about" onclick="playClick()" class="px-3 py-2 rounded-full text-gray-300 hover:text-white transition">Лаборатория</a>
+        <a href="#projects" onclick="playClick()" class="px-3 py-2 rounded-full text-gray-300 hover:text-white transition">Проекты</a>
+        <a href="#capsules" onclick="playClick()" class="px-3 py-2 rounded-full text-gray-300 hover:text-white transition">Капсулы</a>
+        <a href="#private" onclick="playClick()" class="px-3 py-2 rounded-full text-gray-300 hover:text-white transition">Приватки</a>
+        <a href="#specs" onclick="playClick()" class="px-3 py-2 rounded-full text-gray-300 hover:text-white transition">Система</a>
+        
+        <div class="theme-dropdown">
+          <button onclick="playClick(); toggleThemeMenu(event);" class="px-3.5 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider text-gray-300 hover:text-white flex items-center gap-1.5 transition cursor-pointer">
+            <span>🎨 Темы</span>
+          </button>
+          <div id="themeMenu" class="theme-menu">
+            <button onclick="setTheme('hostile'); playClick();" class="theme-option">// 01. Hostile</button>
+            <button onclick="setTheme('void'); playClick();" class="theme-option">// 02. Void Mono</button>
+            <button onclick="setTheme('pill'); playClick();" class="theme-option">// 03. The Pill</button>
+            <button onclick="setTheme('matrix'); playClick();" class="theme-option">// 04. Matrix</button>
+            <button onclick="setTheme('blue'); playClick();" class="theme-option">// 05. Cyber Blue</button>
+            <button onclick="setTheme('amber'); playClick();" class="theme-option">// 06. Amber</button>
+            <button onclick="setTheme('acid'); playClick();" class="theme-option">// 07. Acid Purple</button>
+          </div>
+        </div>
+
+        <a href="#contact" onclick="playClick()" class="px-4 py-2 rounded-full btn-cyber magnetic text-white font-bold">Связь</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-2">
+        <a href="https://t.me/MLT08" target="_blank" onclick="playClick()" class="px-5 py-2 rounded-full btn-cyber magnetic text-white text-sm font-bold">
+          Telegram
+        </a>
+      </div>
+
+      <button onclick="playClick(); toggleMobileMenu();" class="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- МОБИЛЬНОЕ МЕНЮ -->
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-[#0a0204]/98 backdrop-blur-2xl z-50 p-6 flex flex-col justify-between border-l border-white/10 shadow-2xl md:hidden">
+    <div>
+      <div class="flex items-center justify-between mb-6">
+        <span class="font-display font-black text-lg text-white">MLT // MENU</span>
+        <button onclick="playClick(); toggleMobileMenu();" class="p-2 rounded-full bg-white/10 text-white cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="mb-5 pb-5 border-b border-white/10">
+        <span class="block font-mono text-[10px] text-gray-400 uppercase tracking-widest mb-2.5">ВЫБОР ТЕМЫ:</span>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="setTheme('hostile'); playClick(); toggleMobileMenu();" class="p-2 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-gray-200">01. Hostile</button>
+          <button onclick="setTheme('void'); playClick(); toggleMobileMenu();" class="p-2 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-gray-200">02. Void</button>
+          <button onclick="setTheme('pill'); playClick(); toggleMobileMenu();" class="p-2 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-gray-200">03. Pill</button>
+          <button onclick="setTheme('matrix'); playClick(); toggleMobileMenu();" class="p-2 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-gray-200">04. Matrix</button>
+          <button onclick="setTheme('blue'); playClick(); toggleMobileMenu();" class="p-2 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-gray-200">05. Blue</button>
+          <button onclick="setTheme('amber'); playClick(); toggleMobileMenu();" class="p-2 text-xs font-mono rounded-lg bg-white/5 border border-white/10 text-gray-200">06. Amber</button>
+          <button onclick="setTheme('acid'); playClick(); toggleMobileMenu();" class="p-2 text-xs font-mono rounded-lg bg-white/5 border border-white/10 col-span-2 text-gray-200">07. Acid Purple</button>
+        </div>
+      </div>
+
+      <nav class="flex flex-col space-y-3 font-display text-base font-bold">
+        <a href="#about" onclick="playClick(); toggleMobileMenu();" class="text-gray-300 hover:text-white transition">Лаборатория</a>
+        <a href="#projects" onclick="playClick(); toggleMobileMenu();" class="text-gray-300 hover:text-white transition">Проекты</a>
+        <a href="#capsules" onclick="playClick(); toggleMobileMenu();" class="text-gray-300 hover:text-white transition">Капсулы</a>
+        <a href="#private" onclick="playClick(); toggleMobileMenu();" class="text-gray-300 hover:text-white transition">Приватки</a>
+        <a href="#specs" onclick="playClick(); toggleMobileMenu();" class="text-gray-300 hover:text-white transition">Система</a>
+        <a href="#contact" onclick="playClick(); toggleMobileMenu();" class="text-gray-300 hover:text-white transition">Связь</a>
+      </nav>
+    </div>
+    <div class="pt-5 border-t border-white/10">
+      <a href="https://t.me/MLT08" target="_blank" onclick="playClick()" class="block w-full py-3 rounded-xl btn-cyber text-white font-bold text-center text-sm">
+        Написать в Telegram
+      </a>
+    </div>
+  </div>
+
+  <!-- КОНТЕНТ -->
+  <main class="max-w-6xl mx-auto px-4 pt-6 sm:pt-12 pb-24">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[65vh] reveal-on-scroll">
+      <div class="lg:col-span-7">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white/5 border border-white/10 soft-accent-text mb-5">
+          <span>⚡ Секретный протокол</span>
+        </div>
+        <h1 class="font-display text-3xl sm:text-6xl font-black tracking-tight leading-[0.95] mb-5">
+          MLT <span class="soft-accent-text cyber-glitch">TEAM</span>
+        </h1>
+        <p class="text-gray-400 text-sm sm:text-lg font-normal leading-relaxed max-w-xl mb-7">
+          Закрытая цифровая экосистема нового поколения. Выбирай свою капсулу реальности. Никакой воды — только чистый контент и жесткая практика.
+        </p>
+        <div>
+          <a href="https://t.me/MLT08" target="_blank" onclick="playClick()" class="px-7 py-3.5 rounded-2xl btn-cyber magnetic font-bold text-white text-sm">
+            Активировать доступ
+          </a>
+        </div>
+      </div>
+
+      <!-- ГЛАВНЫЙ ВИДЕО-БЛОК -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="w-full max-w-[360px] sm:max-w-[420px] aspect-[4/5] cyber-card hero-glow-frame p-3 shadow-2xl flex items-center justify-center text-center relative overflow-hidden">
+          <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-2xl">
+            <source src="hero.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- О НАС -->
+    <section id="about" class="mt-20 sm:mt-32 reveal-on-scroll">
+      <h2 class="font-display text-2xl sm:text-5xl font-black text-center mb-10 sm:mb-16 tracking-tight soft-accent-text cyber-glitch">
+        О НАС
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
+        <div class="cyber-card p-6 sm:p-10 flex flex-col justify-between">
+          <div>
+            <div class="inline-block px-3 py-1 rounded-lg bg-white/5 text-gray-300 font-mono text-xs mb-4 border border-white/10">
+              [ 01 // IDENTITY ]
+            </div>
+            <h3 class="font-display text-xl sm:text-3xl font-bold soft-accent-text mb-3">Кто мы</h3>
+            <p class="text-gray-400 text-xs sm:text-base leading-relaxed italic">
+              Мы команда MLT. Развиваемся в сфере психологии, криптовалюты, заработка и вайбкодинга. Создаем собственную экосистему из пяти «таблеток», объединяем единомышленников и делимся практическим опытом.
+            </p>
+          </div>
+        </div>
+
+        <div class="cyber-card p-6 sm:p-10 flex flex-col justify-between">
+          <div>
+            <div class="inline-block px-3 py-1 rounded-lg bg-white/5 text-gray-300 font-mono text-xs mb-4 border border-white/10">
+              [ 02 // THE PILL PROTOCOL ]
+            </div>
+            <h3 class="font-display text-xl sm:text-3xl font-bold soft-accent-text mb-4">
+              <span class="block mb-0.5">MLT Community</span>
+              <span class="block mb-0.5">Psychology</span>
+              <span class="block">Crypto</span>
+            </h3>
+            <p class="text-gray-400 text-xs sm:text-base leading-relaxed italic">
+              Флагманский проект «The Pill Protocol» объединяет закрытое комьюнити, передовые психологические практики и криптовалютные стратегии нового уровня.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРОЕКТЫ -->
+    <section id="projects" class="mt-20 sm:mt-32 reveal-on-scroll">
+      <h2 class="font-display text-2xl sm:text-5xl font-black text-center mb-10 sm:mb-16 tracking-tight soft-accent-text cyber-glitch">
+        Проекты MLT
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
+        <div class="cyber-card p-6 sm:p-10 flex flex-col justify-between">
+          <div>
+            <div class="inline-block px-3 py-1 rounded-lg bg-white/5 text-gray-300 font-mono text-xs mb-4 border border-white/10">
+              [ PROTOCOL // 01 ]
+            </div>
+            <h3 class="font-display text-xl sm:text-3xl font-bold soft-accent-text mb-3">The Pill Protocol</h3>
+            <p class="text-gray-400 text-xs sm:text-base leading-relaxed italic">
+              Практическая лаборатория навыков. Закрытые гайды, алгоритмы вайбкодинга, генерация контента нового поколения и инструменты реального роста в цифровой среде.
+            </p>
+          </div>
+        </div>
+
+        <div class="cyber-card p-6 sm:p-10 flex flex-col justify-between">
+          <div>
+            <div class="inline-block px-3 py-1 rounded-lg bg-white/5 text-gray-300 font-mono text-xs mb-4 border border-white/10">
+              [ PARTNERSHIP // 02 ]
+            </div>
+            <h3 class="font-display text-xl sm:text-3xl font-bold soft-accent-text mb-3">Bitunix Official Partner</h3>
+            <p class="text-gray-400 text-xs sm:text-base leading-relaxed italic">
+              Прямое стратегическое партнерство с криптобиржей Bitunix. Готовим закрытые обучающие потоки, торговые стратегии и практические материалы по крипте для комьюнити.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. ВЕРХНИЙ БЛОК: 5 БЕСПЛАТНЫХ КАПСУЛ С ПЕРЕХОДОМ В ТГК -->
+    <section id="capsules" class="mt-20 sm:mt-32 reveal-on-scroll">
+      <h2 class="font-display text-2xl sm:text-5xl font-black text-center mb-10 sm:mb-16 tracking-tight cyber-glitch">
+        5 ЦИФРОВЫХ <span class="soft-accent-text">КАПСУЛ</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- Дизайн -->
+        <div onclick="playClick(); openModal('Дизайн', 'Современные интерфейсы, кибер-эстетика, UI/UX и визуальный стиль нового поколения.', 'https://t.me/MLT_Dizain', '🔵', 'DESIGN // 01', 'design.mp4')" class="cyber-card p-6 sm:p-8 flex flex-col justify-between cursor-pointer group">
+          <div>
+            <div class="w-10 h-10 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-lg mb-4">🔵</div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Дизайн ↗</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed italic">Современные интерфейсы, кибер-эстетика, UI/UX и визуальный стиль нового поколения.</p>
+          </div>
+        </div>
+
+        <!-- Отношения -->
+        <div onclick="playClick(); openModal('Отношения', 'Психология влияния, коммуникации, связи и цифровой социальный интеллект.', 'https://t.me/MLT_otnoshenia', '🔴', 'RELATIONS // 02', 'relations.mp4')" class="cyber-card p-6 sm:p-8 flex flex-col justify-between cursor-pointer group">
+          <div>
+            <div class="w-10 h-10 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center text-lg mb-4">🔴</div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Отношения ↗</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed italic">Психология влияния, коммуникации, связи и цифровой социальный интеллект.</p>
+          </div>
+        </div>
+
+        <!-- Психология -->
+        <div onclick="playClick(); openModal('Психология & Медицина', 'Контроль разума, биохакинг продуктивности, ментальная устойчивость, а также продвинутая биомедицина и биохакинг тела.', 'https://t.me/MLT_Psychology', '⚪', 'PSYCHOLOGY // 03', 'psychology.mp4')" class="cyber-card p-6 sm:p-8 flex flex-col justify-between cursor-pointer group">
+          <div>
+            <div class="w-10 h-10 rounded-2xl bg-white/10 border border-white/30 text-white flex items-center justify-center text-lg mb-4">⚪</div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Психология ↗</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed italic">Контроль разума, биохакинг продуктивности, ментальная устойчивость, а также биомедицина и здоровье тела.</p>
+          </div>
+        </div>
+
+        <!-- Вайбкодинг -->
+        <div onclick="playClick(); openModal('Вайбкодинг', 'Замена старому кодингу. Полное обучение с нуля, продвинутые промты, готовые скрипты и практика.', 'https://t.me/MLT_vibecoding', '🟠', 'VIBECODING // 04', 'vibecoding.mp4')" class="cyber-card p-6 sm:p-8 flex flex-col justify-between md:col-span-1.5 cursor-pointer group">
+          <div>
+            <div class="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center text-lg mb-4">🟠</div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Вайбкодинг ↗</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed italic">Замена старому кодингу. Полное обучение с нуля, продвинутые промты, готовые скрипты и практика.</p>
+          </div>
+        </div>
+
+        <!-- Заработок -->
+        <div onclick="playClick(); openModal('Заработок', 'Монетизация цифровых навыков, генерация трафика и построение стабильных денежных потоков.', 'https://t.me/MLT_Zarabotok', '🟢', 'EARNING // 05', 'earning.mp4')" class="cyber-card p-6 sm:p-8 flex flex-col justify-between md:col-span-1.5 cursor-pointer group">
+          <div>
+            <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg mb-4">🟢</div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Заработок ↗</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed italic">Монетизация цифровых навыков, генерация трафика и построение стабильных денежных потоков.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. НИЖНИЙ БЛОК: ПРИВАТКИ С ЦЕНОЙ ПО 5К И ПЕРЕХОДОМ НА @MLT08 -->
+    <section id="private" class="mt-20 sm:mt-32 reveal-on-scroll">
+      <h2 class="font-display text-2xl sm:text-5xl font-black text-center mb-10 sm:mb-16 tracking-tight cyber-glitch">
+        ЗАКРЫТЫЕ <span class="soft-accent-text">ПРИВАТКИ</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Приватка: Дизайн -->
+        <div class="cyber-card p-6 sm:p-8 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-lg">🔵</div>
+              <span class="font-mono text-sm font-bold text-white px-3 py-1 rounded-lg bg-white/5 border border-white/10">5 000 ₽</span>
+            </div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Приватка: Дизайн</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6 italic">Эксклюзивные материалы, закрытые разборы интерфейсов и личные воркшопы.</p>
+          </div>
+          <div>
+            <button onclick="playClick(); buyPrivate('Приватка: Дизайн', '5 000 ₽', 'https://t.me/MLT08')" class="w-full py-3 rounded-xl btn-cyber magnetic text-white font-bold text-xs sm:text-sm text-center cursor-pointer">
+              Купить доступ ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Приватка: Отношения -->
+        <div class="cyber-card p-6 sm:p-8 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center text-lg">🔴</div>
+              <span class="font-mono text-sm font-bold text-white px-3 py-1 rounded-lg bg-white/5 border border-white/10">5 000 ₽</span>
+            </div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Приватка: Отношения</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6 italic">Глубокая психология межличностных связей, жесткие паттерны влияния и практика.</p>
+          </div>
+          <div>
+            <button onclick="playClick(); buyPrivate('Приватка: Отношения', '5 000 ₽', 'https://t.me/MLT08')" class="w-full py-3 rounded-xl btn-cyber magnetic text-white font-bold text-xs sm:text-sm text-center cursor-pointer">
+              Купить доступ ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Приватка: Психология -->
+        <div class="cyber-card p-6 sm:p-8 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-white/10 border border-white/30 text-white flex items-center justify-center text-lg">⚪</div>
+              <span class="font-mono text-sm font-bold text-white px-3 py-1 rounded-lg bg-white/5 border border-white/10">5 000 ₽</span>
+            </div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Приватка: Психология</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6 italic">Продвинутый биохакинг разума, управление состоянием и ментальная устойчивость.</p>
+          </div>
+          <div>
+            <button onclick="playClick(); buyPrivate('Приватка: Психология', '5 000 ₽', 'https://t.me/MLT08')" class="w-full py-3 rounded-xl btn-cyber magnetic text-white font-bold text-xs sm:text-sm text-center cursor-pointer">
+              Купить доступ ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Приватка: Вайбкодинг -->
+        <div class="cyber-card p-6 sm:p-8 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center text-lg">🟠</div>
+              <span class="font-mono text-sm font-bold text-white px-3 py-1 rounded-lg bg-white/5 border border-white/10">5 000 ₽</span>
+            </div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Приватка: Вайбкодинг</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6 italic">Закрытые скрипты автоматизации, софт, автопостинг и готовые архитектуры.</p>
+          </div>
+          <div>
+            <button onclick="playClick(); buyPrivate('Приватка: Вайбкодинг', '5 000 ₽', 'https://t.me/MLT08')" class="w-full py-3 rounded-xl btn-cyber magnetic text-white font-bold text-xs sm:text-sm text-center cursor-pointer">
+              Купить доступ ↗
+            </button>
+          </div>
+        </div>
+
+        <!-- Приватка: Заработок -->
+        <div class="cyber-card p-6 sm:p-8 flex flex-col justify-between group lg:col-span-2">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg">🟢</div>
+              <span class="font-mono text-sm font-bold text-white px-3 py-1 rounded-lg bg-white/5 border border-white/10">5 000 ₽</span>
+            </div>
+            <h3 class="font-display text-xl sm:text-2xl font-bold soft-accent-text mb-2">Приватка: Заработок</h3>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6 italic">Построение денежных потоков, монетизация трафика и схемы реального профита в цифровой среде.</p>
+          </div>
+          <div>
+            <button onclick="playClick(); buyPrivate('Приватка: Заработок', '5 000 ₽', 'https://t.me/MLT08')" class="w-full py-3 rounded-xl btn-cyber magnetic text-white font-bold text-xs sm:text-sm text-center cursor-pointer">
+              Купить доступ ↗
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- СИСТЕМА -->
+    <section id="specs" class="mt-20 sm:mt-32 reveal-on-scroll">
+      <div class="cyber-card p-6 sm:p-10 max-w-4xl mx-auto backdrop-blur-xl">
+        <div class="flex items-center justify-between mb-5 font-mono text-[11px] soft-accent-text uppercase tracking-widest">
+          <span>[ SYSTEM STATUS ]</span>
+          <span>ONLINE // RESTRICTED</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center font-mono">
+          <div class="p-3.5 rounded-xl bg-black/40 border border-white/10">
+            <span class="block text-gray-500 text-[10px] mb-1">ENCRYPTION</span>
+            <span class="text-white text-xs sm:text-sm font-bold">AES-256</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/40 border border-white/10">
+            <span class="block text-gray-500 text-[10px] mb-1">NODE</span>
+            <span class="text-white text-xs sm:text-sm font-bold">KZ-07</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/40 border border-white/10">
+            <span class="block text-gray-500 text-[10px] mb-1">PROTOCOL</span>
+            <span class="text-white text-xs sm:text-sm font-bold">HOSTILE</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/40 border border-white/10">
+            <span class="block text-gray-500 text-[10px] mb-1">VERSION</span>
+            <span class="text-white text-xs sm:text-sm font-bold">v2.5.0</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contact" class="mt-20 sm:mt-32 reveal-on-scroll">
+      <div class="cyber-card p-8 sm:p-16 text-center max-w-3xl mx-auto backdrop-blur-xl">
+        <h2 class="font-display text-2xl sm:text-4xl font-black mb-3 soft-accent-text cyber-glitch">ВХОД В СИСТЕМУ</h2>
+        <p class="text-gray-400 text-xs sm:text-base mb-7 italic">Готов принять таблетку и изменить правила игры? Пиши лично.</p>
+        <a href="https://t.me/MLT08" target="_blank" onclick="playClick()" class="inline-flex px-8 py-3.5 rounded-2xl btn-cyber magnetic font-bold text-white text-sm text-center">
+          Написать в Telegram (@MLT08)
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let audioCtx = null;
+    function playClick() {
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.05);
+        
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {}
+    }
+
+    // Покупка приватки (ведет на @MLT08)
+    function buyPrivate(productName, price, tgLink) {
+      const message = encodeURIComponent(`Привет! Хочу купить доступ в приватку: "${productName}" (${price}). Как оплатить?`);
+      window.open(`${tgLink}?text=${message}`, '_blank');
+    }
+
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      localStorage.setItem('mlt_theme', themeName);
+      closeThemeMenu();
+    }
+
+    const savedTheme = localStorage.getItem('mlt_theme') || 'hostile';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    function toggleThemeMenu(event) {
+      event.stopPropagation();
+      const menu = document.getElementById('themeMenu');
+      if (menu) menu.classList.toggle('active');
+    }
+
+    function closeThemeMenu() {
+      const menu = document.getElementById('themeMenu');
+      if (menu) menu.classList.remove('active');
+    }
+
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('.theme-dropdown')) {
+        closeThemeMenu();
+      }
+    });
+
+    const introTextEl = document.getElementById('intro-text');
+    const textString = "MLT\nPROJECT";
+    textString.split('').forEach((char, index) => {
+      const span = document.createElement('span');
+      span.className = 'intro-char';
+      span.style.animationDelay = `${index * 0.08}s`;
+      if (char === '\n') {
+        introTextEl.appendChild(document.createElement('br'));
+      } else {
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        introTextEl.appendChild(span);
+      }
+    });
+
+    function skipIntro() {
+      const intro = document.getElementById("intro-screen");
+      if (intro) {
+        intro.style.opacity = '0';
+        intro.style.visibility = 'hidden';
+        setTimeout(() => intro.remove(), 800);
+      }
+    }
+
+    // Модальное окно для бесплатных ТГК капсул
+    function openModal(title, desc, link, icon, tag, videoSrc) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('modal-link').href = link;
+      document.getElementById('modal-icon').textContent = icon;
+      document.getElementById('modal-tag').textContent = `[ ${tag || 'PROTOCOL // HOSTILE'} ]`;
+      
+      const videoEl = document.getElementById('modal-video');
+      const fallbackEl = document.getElementById('video-fallback');
+      
+      fallbackEl.classList.add('hidden');
+      videoEl.classList.remove('hidden');
+      videoEl.src = videoSrc;
+      videoEl.load();
+      videoEl.play().catch(() => {
+        videoEl.classList.add('hidden');
+        fallbackEl.classList.remove('hidden');
+      });
+
+      document.getElementById('lab-modal').classList.add('open');
+    }
+
+    function handleVideoError() {
+      const videoEl = document.getElementById('modal-video');
+      const fallbackEl = document.getElementById('video-fallback');
+      videoEl.classList.add('hidden');
+      fallbackEl.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      const videoEl = document.getElementById('modal-video');
+      videoEl.pause();
+      document.getElementById('lab-modal').classList.remove('open');
+    }
+
+    document.getElementById('lab-modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('lab-modal')) {
+        closeModal();
+      }
+    });
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      if (menu) menu.classList.toggle('open');
+    }
+
+    document.querySelectorAll('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0px, 0px)';
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = scrollTop / docHeight;
+      const pill = document.getElementById('scrollPill');
+      if (pill) {
+        const moveRange = window.innerHeight * 0.6;
+        const translateY = (scrollPercent - 0.5) * moveRange;
+        const rotate = scrollPercent * 720;
+        pill.style.transform = `translateY(${translateY}px) rotate(${rotate}deg)`;
+      }
+    });
+
+    let lastScrollY = window.scrollY;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+        
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else if (!scrollingDown) {
+          entry.target.classList.remove('active');
+        }
+      });
+      lastScrollY = window.scrollY;
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    if (!isTouchDevice) {
+      document.querySelectorAll('.cyber-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -3;
+          const rotateY = ((x - centerX) / centerX) * 3;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+      });
+    }
+  </script>
+</body>
+</html>
