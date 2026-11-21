@@ -381,20 +381,33 @@
     .priv-grid p { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 18px; max-width: 530px; }
 
     .photo-card {
-      border-radius: 26px; padding: 12px;
-      background: linear-gradient(155deg, rgba(198, 222, 201, 0.24), rgba(11, 16, 13, 0.94) 50%, rgba(148, 179, 155, 0.14));
-      border: 1px solid rgba(198, 222, 201, 0.26);
-      box-shadow: 0 32px 70px -18px rgba(0, 0, 0, 0.92);
-      transition: transform .55s var(--ease);
-    }
-    .photo-card:hover { transform: translateY(-6px); }
-    .photo-in { position: relative; border-radius: 18px; overflow: hidden; background: var(--bg); }
-    .photo-in img {
-      display: block; width: 100%; aspect-ratio: 4 / 4.2; object-fit: cover;
-      filter: contrast(1.12) saturate(1.06) brightness(0.96);
-      transition: transform .85s var(--ease);
-    }
-    .photo-card:hover img { transform: scale(1.04); }
+  border-radius: 24px;
+  padding: 10px;
+  background: linear-gradient(155deg, rgba(198, 222, 201, 0.22), rgba(11, 16, 13, 0.94));
+  border: 1px solid rgba(198, 222, 201, 0.24);
+  box-shadow: 0 28px 65px -18px rgba(0, 0, 0, 0.9);
+  transition: transform .5s var(--ease), border-color .35s;
+}
+.photo-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-hi);
+}
+.photo-in {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #060807;
+}
+.photo-in img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .8s var(--ease);
+}
+.photo-card:hover .photo-in img {
+  transform: scale(1.03);
+}
     .photo-in::after {
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background: radial-gradient(circle at 50% 45%, transparent 52%, rgba(5, 7, 6, 0.68) 100%), linear-gradient(180deg, transparent 62%, rgba(5, 7, 6, 0.88) 100%);
@@ -738,10 +751,10 @@
         </div>
 
         <div class="photo-card reveal d2">
-          <div class="photo-in">
-            <img src="image_e5dc27.jpg" alt="AURLEN" loading="lazy" decoding="async" />
-            <div class="photo-bar"><span>AURLEN</span><span>Закрытый доступ</span></div>
-          </div>
+  <div class="photo-in">
+    <img src="image_e5dc27.jpg" alt="AURLEN PRIVATE" loading="lazy" decoding="async" />
+  </div>
+</div>
         </div>
       </div>
     </section>
